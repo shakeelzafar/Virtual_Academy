@@ -1,0 +1,10 @@
+
+			@media (max-width : 640px) {
+				#crestashareicon {
+					display:none !important;
+				}
+			}
+		#crestashareicon {position:fixed; top:20%; left:20px; float:left;z-index:99;}
+
+		#crestashareicon .sbutton {clear:both;display:none;}
+		#crestashareicon .sbutton { float:left;}#crestashareiconincontent {float: none; margin: 0 auto; display: table;}

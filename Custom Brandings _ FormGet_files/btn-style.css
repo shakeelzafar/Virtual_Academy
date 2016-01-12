@@ -1,0 +1,136 @@
+/* Flat Buttons
+==========================================*/
+.inkst-btn.flat{
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 14px 26px;
+    font-size: 14px;
+    line-height: 100%;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    display:inline-block;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.1s ease-in-out;
+    -webkit-transition: background 0.1s ease-in-out;
+    -moz-transition: background 0.1s ease-in-out;
+    -ms-transition: background 0.1s ease-in-out;
+    -o-transition: background 0.1s ease-in-out;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    text-decoration: none !important;
+}
+#content_wrapper.content .post .post-content .inkst-btn.flat{
+    color:#fff;
+    text-decoration: none !important;
+}
+/* Flat Bright Blue
+==========================================*/
+.inkst-btn.flat.bright-blue{
+    background-color: #3fb8e8;
+    box-shadow: 0px 3px 0px 0px #3293ba;
+}
+.inkst-btn.flat.bright-blue:hover {
+    background-color: #1baae3;
+    color: #fff;
+}
+.inkst-btn.flat.bright-blue:active {
+    box-shadow: 0px 1px 0px 0px #3293ba;
+}
+/* Flat Soft Red
+==========================================*/
+.inkst-btn.flat.soft-red {
+    background-color: #f06060;
+    box-shadow: 0px 3px 0px 0px #cd1313;
+}
+.inkst-btn.flat.soft-red:hover {
+    background-color: #ed4444;
+    color: #fff;
+}
+.inkst-btn.flat.soft-red:active {
+    box-shadow: 0px 1px 0px 0px #cd1313;
+}
+/* Flat Very Light Red
+==========================================*/
+.inkst-btn.flat.very-light-red {
+    background-color: #ff6a80;
+    box-shadow: 0px 3px 0px 0px #da0020;
+}
+.inkst-btn.flat.very-light-red:hover {
+    color: #fff;
+    background-color: #ff566f;
+}
+.inkst-btn.flat.very-light-red:active {
+    box-shadow: 0px 1px 0px 0px #da0020;
+}
+/* Flat Vivid Yello
+==========================================*/
+.inkst-btn.flat.vivid-yello {
+    background-color: #f1c40f;
+    box-shadow: 0px 3px 0px 0px #af8f0e;
+}
+.inkst-btn.flat.vivid-yello:hover {
+    color: #fff;
+    background-color: #d0aa10;
+}
+.inkst-btn.flat.vivid-yello:active {
+    box-shadow: 0px 1px 0px 0px #af8f0e;
+}
+
+
+#formget_spauncer{
+    border:1px solid #d3d3d3;
+    padding:30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+#formget_spauncer img{
+    max-width: 100%;
+    height: auto;
+}
+#formget_spauncer .navbuttons{
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+#formget_spauncer .navbuttons li,
+#formget_spauncer .navbuttons li a{
+    display: inline-block;
+    color: #fff;
+    text-decoration: none !important;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 8px 12px 8px 12px;
+    min-width: 125px;
+}
+#formget_spauncer .navbuttons li a.try-it{
+    background-color: #3fb8e8;
+}
+#formget_spauncer .navbuttons li a.try-it:hover{
+    background-color: #20a6db;
+}
+#formget_spauncer .navbuttons li a.buy-it{
+    background-color: #ff6a80;
+}
+#formget_spauncer .navbuttons li a.buy-it:hover{
+    background-color: #f43c57;
+}
+#formget_spauncer .navbuttons li a.doc{
+    background-color: #f1c40f;
+}
+#formget_spauncer .navbuttons li a.doc:hover{
+    background-color: #c9a309;
+}
+
+#content_wrapper.content .post .post-content #formget_spauncer .navbuttons li a.try-it,
+#content_wrapper.content .post .post-content #formget_spauncer .navbuttons li a.buy-it{
+    color:#fff;
+    text-decoration: none !important;
+    font-weight: normal;
+}
