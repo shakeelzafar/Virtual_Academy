@@ -1,0 +1,69 @@
+﻿@using Test_MVC.Models;
+@model Test_MVC.Models.Chapter
+
+@{
+    Layout = "../Shared/_Admin.cshtml";
+
+}
+<section class="content">
+    <div class="row">
+
+        <form class="form-horizontal" role="form" style="border:double; border-color:aqua" method="post">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Chapter @Model.ChapterNo: </label>
+                <div class="col-lg-3 ">
+                    <label class="col-lg-3 control-label" style="font-size:20px">@Model.Name </label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Description: </label>
+                <div class="col-lg-4 ">
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </form>
+
+        <div style=" margin-right:8%">
+            <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                    <tr style="">
+                        <th style="width: 30%; text-align: center">MainTopic</th>
+                        <th style="width: 30%; text-align: center">Description</th>
+                        <th style="width: 10%; text-align: center">Update</th>
+                        <th style="width: 10%; text-align: center">View</th>
+                        <th style="width: 10%; text-align: center">Delete </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        
+                        foreach (var v in Model.MainTopic)
+                        {
+
+                            <tr>
+                                <td style="text-align: center">@v.Name</td>
+                                <td style="text-align: center">@v.Description</td>
+                                <td class="fa fa-edit" style="margin-left: 15%; background-color: lightblue"><a href="~/Admin/UpdateMainTopic/@v.MainTopicId">&nbsp;&nbsp;Edit</a></td>
+                                <td class="fa fa-edit" style="margin-left: 15%; background-color: lightblue"><a href="~/Admin/Detail_Of_MainTopic/@v.MainTopicId">&nbsp;&nbsp;View All</a></td>
+                                <td class="fa fa-remove" style="margin-left:15%;  background-color:lightblue; text-align:center"><a href="~/Admin/DeleteMainTopic/@v.MainTopicId">&nbsp; Delete</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr style="">
+                        <th style="width: 30%; text-align: center">MainTopic</th>
+                        <th style="width: 30%; text-align: center">Description</th>
+                        <th style="width: 10%; text-align: center">Update</th>
+                        <th style="width: 10%; text-align: center">View</th>
+                        <th style="width: 10%; text-align: center">Delete </th>
+                    </tr>
+                </tfoot>
+            </table>
+
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section>

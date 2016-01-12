@@ -1,0 +1,102 @@
+﻿<div id="content_wrapper" class="content single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 float-left">
+                <div class="sidebar-page rmm taxlist graphite">
+
+                    <span class="sidebar-title" style="display: block;">9th</span>
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../Class/Subject">1. Introduction to Algebra</a></li>
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../Class/Subject">2. Trignometry</a></li>
+                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../Class/Subject">3. Intro to Biology</a></li>
+                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../Class/Subject">4. Intro to Nothing of Maths</a></li>
+                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../Class/Subject">5. Now the scene is Computer</a></li>
+
+                    </ul>
+                    <span class="sidebar-title" style="display: block;">Quiz</span>
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                               Add
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="~/Teacher/SelectChapters">Science Maths</a></li>
+                                <li><a href="~/Teacher/SelectChapters "></a>General Maths</li>
+                                
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-2 pull-right" style="margin-top:4%">
+                <div class=" panel panel-success ">
+                    <div class="panel-heading">
+                        Class Members (67)
+                    </div>
+                    <div class="panel-body">
+                        <form action="" class="" style="" >
+                            <label>Add New:</label>
+                        <input type="text" placeholder="Enter email" style="width:80%; " name="memeber"/>
+                            </form>
+                    </div>
+
+                </div>
+            </div>
+
+     
+            <div class="col-md-7" style="padding:0%">
+                @for (int j = 0; j < 17; j++ )
+                { 
+ 
+                    <div class=" panel panel-body" id="Chapter-@j">
+                        <div>
+                            <br />
+                            <h3>Chapter-@j</h3>
+                            <div class="">
+                                <div class=" panel panel-primary ">
+                                    <div class="panel-heading" style="background-color:darkcyan">
+                                        Total Main Topics: 13
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <div>
+                                           
+                                            @for (int i = 0; i < 11; i++)
+                                            {
+                                                <div class="col-md-5">
+                                                     <a href="../../Class/Topic/1">Topic No @i</a>  <hr />
+
+                                                </div>
+                                            }
+                                            <h4>Total Lectures : 59</h4>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                                <!-- /.col-lg-4 -->
+                            </div>
+ 
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+
+
+
+            
+
+        </div>
+    </div>
+
+
+
+</div>

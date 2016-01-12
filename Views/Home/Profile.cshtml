@@ -1,0 +1,46 @@
+﻿@model Test_MVC.Models.UserProfile
+
+<section class="content">
+    <div class="row">
+
+        <form class="form-horizontal" role="form" style="border:double; border-color:aqua" method="post">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">UserName: </label>
+                <div class="col-lg-3 ">
+                    <label class="col-lg-3 control-label" style="font-size:20px">@Model.UserName </label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Email: </label>
+                <div class="col-lg-4 ">
+                    <label class=" control-label" style="font-size:20px">@Model.Email </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Contact No: </label>
+                <div class="col-lg-4 ">
+                    <label class=" control-label" style="font-size:20px">@Model.ContactNo </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Country: </label>
+                <div class="col-lg-4 ">
+                    <label class=" control-label" style="font-size:20px">@Model.Country </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Date Of Birth: </label>
+                <div class="col-lg-4 ">
+                    <label class=" control-label" style="font-size:20px">@Model.DateOfBirth </label>
+                </div>
+            </div>
+            <hr />
+
+
+        </form>
+
+
+    </div><!-- /.row -->
+</section>
+

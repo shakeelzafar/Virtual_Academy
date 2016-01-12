@@ -1,0 +1,169 @@
+﻿<div id="content_wrapper" class="content single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar-page rmm taxlist graphite">
+
+                    <span class="sidebar-title" style="display: block;">Classes</span>
+
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">
+                            <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        9th
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Teacher/SelectChapters">Science Maths</a></li>
+                                        <li><a href="~/Teacher/SelectChapters ">General Maths</a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>                       
+                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018">
+                            <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        10th
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Teacher/SelectChapters">Science Maths</a></li>
+                                        <li><a href="~/Teacher/SelectChapters ">General Maths</a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018">
+                            <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        1st Year
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Teacher/SelectChapters">Science Maths</a></li>
+                                        <li><a href="~/Teacher/SelectChapters ">General Maths</a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>                        
+
+                    </ul>
+                    <hr/>
+                    <span class="sidebar-title" style="display: block;">Other Actions</span>
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                        <li id="menu-item-30013" style="margin-left:3%" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">
+                        Add Class
+                         <form>
+                           <select id="ClassSelector" name="Class">                               
+                                <option>9th</option>
+                             <option>10th</option>
+                           </select>
+                             @Scripts.Render("~/bundles/jquery")
+                            <script>
+
+                                $(document).ready(function () {
+
+                                    $('#ClassSelector').change(function () {
+                                        var value = $('#ClassSelector').val();
+                                        alert(value);
+                                        
+
+                                        $("#SubjectSelector").load("<p>No Data</p>");
+                                        
+                                        $("#d1").html("<select><option>9th</option></select>");
+                                    });
+                                });
+                             </script>
+
+                           
+                             <div id="d1">
+                                 <select name="Class">
+                                     <option>--Select--</option>
+                                 </select>
+                             </div>
+                             <div id="SubjectSelector">
+
+                             </div>
+                            </form>
+                        </li>
+                        
+                        
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-7">
+               
+                <div class="panel panel-primary">
+
+                    <div class="panel-body " style="background-color:#ccc">
+                        <img src="C:/Users/Shakeel-Zafar/Documents/Visual Studio 2013/Projects/fyp/fyp/Content/images/icon.png" style="float:left; margin-right:0%" width="8%" height="0%"></img>
+                        <textarea style="width:90%; height:90%" class="pull-right" placeholder="New Post..."></textarea>
+                    </div>
+
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="">
+                        <p>I don't understand the value of this little butterfly. Why bunny got terrified.</p>
+                    </div>
+                    <div class="panel-body " style="margin-left:5%">
+
+                        <p>Answer of this question will be here.</p>
+                    </div>
+
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="">
+                        <p>I don't understand the value of this little butterfly. Why bunny got terrified.</p>
+                    </div>
+                    <div class="panel-body " style="margin-left:5%">
+
+                        <p>Answer of this question will be here.</p>
+                    </div>
+
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="">
+                        <p>I don't understand the value of this little butterfly. Why bunny got terrified.</p>
+                    </div>
+                    <div class="panel-body " style="margin-left:5%">
+
+                        <p>Answer of this question will be here.</p>
+                    </div>
+
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="">
+                        <p>I don't understand the value of this little butterfly. Why bunny got terrified.</p>
+                    </div>
+                    <div class="panel-body " style="margin-left:5%">
+
+                        <p>Answer of this question will be here.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--            <div class="col-md-3 col-sm-4">-->
+            <!--            </div> -->
+
+        </div>
+    </div>
+</div>

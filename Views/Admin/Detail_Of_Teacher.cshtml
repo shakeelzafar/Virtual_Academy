@@ -1,0 +1,87 @@
+﻿@model Test_MVC.Models.UserProfile
+
+@{
+    Layout = "../Shared/_Admin.cshtml";
+
+}
+<section class="content">
+    <div class="row">
+
+        <form class="form-horizontal" role="form" style="border:double; border-color:aqua" method="post">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Name: </label>
+                <div class="col-lg-3 ">
+                    <label class="col-lg-3 control-label" style="font-size:20px">@Model.UserName </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Email: </label>
+                <div class="col-lg-3 ">
+                    <label class="col-lg-3 control-label" style="font-size:20px">@Model.Email </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Contact No: </label>
+                <div class="col-lg-3 ">
+                    <label class="col-lg-3 control-label" style="font-size:20px">@Model.ContactNo </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Country: </label>
+                <div class="col-lg-3 ">
+                    <label class="col-lg-3 control-label" style="font-size:20px">@Model.Country </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Date of Birth: </label>
+                <div class="col-lg-3 ">
+                    <label class="col-lg-3 control-label" style="font-size:20px">@Model.DateOfBirth </label>
+                </div>
+            </div>
+
+
+           
+        </form>
+
+        <div style=" margin-right:8%">
+            <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                    <tr style="">
+                        <th style="width: 30%; text-align: center">Class</th>
+                        <th style="width: 30%; text-align: center">Subject</th>
+                        <th style="width: 10%; text-align: center">No Of Students</th>
+                        
+                        <th style="width: 10%; text-align: center">View</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @foreach (var v in Model.StudentTeacherClass)
+                    {
+
+                        <tr>
+                            <td style="text-align: center">@v.SubjectClass.Class.Name</td>
+                            <td style="text-align: center">@v.SubjectClass.Subject.Name</td>
+                            <td style="text-align: center">Nothing</td>
+                            <td class="fa fa-edit" style="margin-left: 15%; background-color: lightblue"><a href="~/Admin/Detail_Of_StudentTeacherClass/@v.StudentTeacherClassId">&nbsp;&nbsp;View All</a></td>
+
+                        </tr>
+                    }
+                    
+                </tbody>
+                <tfoot>
+                    <tr style="">
+                        <th style="width: 30%; text-align: center">Class</th>
+                        <th style="width: 30%; text-align: center">Subject</th>
+                        <th style="width: 10%; text-align: center">No Of Students</th>
+
+                        <th style="width: 10%; text-align: center">View</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section>

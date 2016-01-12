@@ -1,0 +1,12 @@
+﻿@model Test_MVC.Models.Subject
+           @{
+               Layout = null;
+           }
+<select name="Subject">
+   
+
+    @foreach (var v in Model)
+    {
+        <option>@v.Name</option>
+    }
+</select>   

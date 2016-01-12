@@ -1,0 +1,63 @@
+﻿@model Test_MVC.Models.Chapter
+
+<div id="content_wrapper" class="content single">
+    <div class="container">
+        <div class="row">
+            <div id="wrapper" class="row">
+
+
+                <div class="col-lg-4" style="float: left; padding: 5%; margin-top:1%; background-color: darkcyan">
+                    <div>
+                        <h1>@Model.ChapterNo . @Model.Name</h1>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing.</p>
+                        
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+                <!-- /.row -->
+                @foreach(var v in Model.MainTopic)
+                { 
+                <div style="margin-top:1%; background-color:aliceblue " class="col-lg-8 pull-right">
+                    <hr />
+                    <div class="col-lg-6" style="float:left;   padding-left:2%; padding-right:2%; margin-right:0% ">
+
+
+                        <h3>@Model.ChapterNo . @v.MainTopicNo @v.Name</h3><hr />
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+
+
+                    <div class="col-lg-6" style="float:left; padding:0% ; margin-left:0%">
+
+
+                        <ul>
+                            @{ int lectNo=0;
+                            foreach(var obj in v.Lecture)
+                            { 
+                                
+                            <li class="fa fa-video"  style="list-style:none; padding-top:8%"><a href="../../Class/Topic/@obj.LectureId">@v.MainTopicNo .@lectNo @obj.Description</a></li>
+                            <hr />
+                            
+                            }
+                            }
+                        </ul>
+
+
+
+                    </div>
+
+                </div>
+                }
+                
+
+            </div>
+
+
+            <!--            <div class="col-md-3 col-sm-4">-->
+            <!--            </div> -->
+
+        </div>
+    </div>
+</div>

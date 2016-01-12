@@ -1,0 +1,105 @@
+﻿@model Test_MVC.Models.UserProfile
+
+@{
+    Layout = "../Shared/_Admin.cshtml";
+
+}
+<section class="content">
+    <div class="row">
+
+        <form class="form-horizontal" role="form" style="border:double; border-color:aqua" method="post">
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">UserName: </label>
+                <div class="col-lg-3 ">
+                    <label class="col-lg-3 control-label" style="font-size:20px">@Model.UserName </label>
+                </div>
+            </div>
+            @Model.
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Email: </label>
+                <div class="col-lg-4 ">
+                    <label class=" control-label" style="font-size:20px">@Model.Email </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Contact No: </label>
+                <div class="col-lg-4 ">
+                    <label class=" control-label" style="font-size:20px">@Model.ContactNo </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Country: </label>
+                <div class="col-lg-4 ">
+                    <label class=" control-label" style="font-size:20px">@Model.Country </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Date Of Birth: </label>
+                <div class="col-lg-4 ">
+                    <label class=" control-label" style="font-size:20px">@Model.DateOfBirth </label>
+                </div>
+            </div>
+            <hr/>
+           
+
+        </form>
+
+        
+    </div><!-- /.row -->
+</section>
+
+<section class="content">
+    <div class="content-header">
+
+        <div class="">
+            <!-- ViewBag.title
+            Query....get all content of that title...and from its child class as well but just
+            -->
+            <h3 class="">Class</h3>
+        </div><!-- /.box-header -->
+        <div style=" margin-right:8%">
+            <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                    <tr style="">
+                        <th style="width: auto; text-align: center">Name</th>
+                        <th style="width: auto; text-align: center">Email</th>
+                        <th style="width: auto; text-align: center">Classes</th>
+                        
+                        <th style="width: auto; text-align: center">View</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+
+                   
+                    @foreach (var v in Model.Parent)
+                    {
+
+                        <tr>
+                            <td style="text-align: center">@v.UserProfile.UserName</td>
+                            <td style="text-align: center">@v.UserProfile.Email</td>
+                            <td style="text-align: center">@v.UserProfile.StudentTeacherClass.Count()</td>
+                            <td class="fa fa-edit" style="margin-left: 15%; background-color: lightblue"><a href="~/Admin/Detail_Of_Student/@v.UserProfile.UserId">&nbsp;&nbsp;View All</a></td>
+                          
+                        </tr>
+                    }
+                    
+                </tbody>
+                <tfoot>
+                    <tr style="">
+                        <th style="width: auto; text-align: center">Name</th>
+                        <th style="width: auto; text-align: center">Email</th>
+                        <th style="width: auto; text-align: center">Classes</th>
+                        
+                        <th style="width: 10%; text-align: center">View</th>
+                       
+                    </tr>
+                </tfoot>
+            </table>
+
+
+        </div><!-- /.col -->
+
+    </div><!-- /.row -->
+</section>

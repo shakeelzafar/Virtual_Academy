@@ -1,0 +1,76 @@
+﻿@model Test_MVC.Models.Quiz
+@{
+    Layout = "../Shared/_Admin.cshtml";
+}
+
+
+
+<div class="" style="margin:5%">
+    <div id="">
+
+
+        
+
+        <div class="panel panel-success" style="">
+
+            <div class="panel-heading">
+                <span style=""><b>Session</b></span>
+            </div>
+
+            <div class="panel-body" style="padding:0px">
+
+                <form action="../Admin/Update_Question" class="form-horizontal" role="form" method="post">
+
+                    @Html.HiddenFor(model=>model.QuestionId)
+                    <div class="panel panel-warning" style="">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label col-lg-2" for="questions">Question :</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" name=" questionNo" required>@Model.Statement</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-2" for="optionA">Option A:</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" name="  optionA" value="@Model.Option_A" required />
+                                </div>
+
+                                <label class="control-label col-lg-2" for="optionB">option B:</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" name="  optionB" value="@Model.Option_B" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-2" for="optionC">option C:</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" name="  optionC" value="@Model.Option_C" required />
+                                </div>
+
+                                <label class="control-label col-lg-2" for="optionD">option D:</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" name="  optionD" value="@Model.Option_D" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-2 " for="correctOption">Correct:</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" name="  correctOption" value="@Model.Correct" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div>
+                        <input type="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:; margin-top:5px; margin-bottom:5px" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>

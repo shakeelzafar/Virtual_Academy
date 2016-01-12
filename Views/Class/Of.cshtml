@@ -1,0 +1,69 @@
+﻿@model Test_MVC.Models.Class
+<div id="content_wrapper" class="content single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                 <div class="sidebar-page rmm taxlist graphite">
+
+                        <span class="sidebar-title" style="display: block;">@Model.Name</span>
+                        <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                            @foreach(var v in Model.SubjectClass)
+                            { 
+                                <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="~/Class/Of#@v.Subject.Name">@v.Subject.Name</a></li>
+                            }
+
+                        </ul>
+                    </div>
+                
+            </div>
+
+            <div class="col-md-8" style="padding:0%">
+
+
+                @foreach (var v in Model.SubjectClass)
+                            {
+
+                                <div class=" panel panel-body" id="@v.Subject.Name" >
+                                    <div >
+                                        <br />
+                                        <a href="../../Class/Subject/@v.Subject_Id"><h3>@v.Subject.Name</h3></a>
+                                        <div class="" >
+                                            <div class=" panel panel-primary " >
+                                                <div class="panel-heading" style="background-color:darkcyan">
+                                                    Total Chapters: @v.Chapter.Count()
+
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div>
+                                                        @{int chap = 1;
+                                                        foreach (var sub in v.Chapter)
+                                                        {
+                                                            <div class="col-md-5">
+                                                                @chap . @sub.Name <hr />
+
+                                                            </div>
+                                                        }}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- /.col-lg-4 -->
+                                        </div>
+
+
+                                        <div>
+                                            <a href="../../Class/Subject/@v.Subject_Id"><button class="btn-progres col-lg-2" style="margin-left:38%">See All</button></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+
+            </div>
+
+    </div>
+
+
+
+</div>

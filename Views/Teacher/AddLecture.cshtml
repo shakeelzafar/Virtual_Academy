@@ -1,0 +1,116 @@
+﻿<div id="content_wrapper" class="content single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar-page rmm taxlist graphite">
+
+                    @*<span class="sidebar-title" style="display: block;">Features</span>
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="http://www.formget.com/features/brandings/">Add Class</a></li>
+                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="~/Teacher/AddLecture">Add Lecture</a></li>
+                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="http://www.formget.com/features/conditional-logic/">Add Quiz</a></li>
+
+                    </ul>
+                    <hr />
+                    <span class="sidebar-title" style="display: block;">Class Attributes</span>*@
+
+                </div>
+
+            </div>
+
+            <div class="col-md-7">
+                <form action="~/Admin/Add_Product" class="form-horizontal" role="form" style="border:double; border-color:aqua" method="post">
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" style="font-size:20px">Class: </label>
+                        <div class="col-lg-3 ">
+                            <select id="ClassSelector" name="category">
+
+                                <option>9th</option>
+                                <option>10th</option>
+                                <option>1st Year</option>
+                                <option>2nd Year</option>
+
+                            </select>
+                        </div>
+                    </div><div class="form-group">
+                        <label class="col-lg-3 control-label" style="font-size:20px">Subject: </label>
+                        <div class="col-lg-3 ">
+                            <select id="SubjectSelector" name="category">
+
+                                <option>Physics</option>
+                                <option>Chemistry</option>
+                                <option>Biology</option>
+                                <option>Mathematics</option>
+
+                            </select>
+                        </div>
+                    </div><div class="form-group">
+                        <label class="col-lg-3 control-label" style="font-size:20px">Chapter: </label>
+                        <div class="col-lg-3 ">
+                            <select id="SubjectSelector" name="category">
+
+                                <option>Introduction to .....</option>
+                                <option>Application of the .....</option>
+                                <option>Study of Maths</option>
+                                <option>Study of Physics</option>
+                                <option>Study of Maths</option>
+                                <option>Study of Physics</option>
+                                <option>Study of Maths</option>
+                                <option>Study of Physics</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" style="font-size:20px">Main-Topic: </label>
+                        <div class="col-lg-3 ">
+                            <select id="MainTopicSelector" name="MainTopicSelector">
+
+                                <option>Introduction to .....</option>
+                                <option>Application of the .....</option>
+                                <option>Study of Maths</option>
+                                <option>Study of Physics</option>
+                                <option>Study of Maths</option>
+                                <option>Study of Physics</option>
+                                <option>Study of Maths</option>
+                                <option>Study of Physics</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <!-- give url of video or post video on your respective account
+                        i.e. Dailymotion or Youtube...
+                        and give acess to us...
+                        -->
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" style="font-size:20px">Lecture: </label>
+                        <div class="col-lg-3 ">
+                            <input type="text" placeholder="description" name="lecture"  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" style="font-size:20px">URL: </label>
+                        <div class="col-lg-3 ">
+                            <input type="text" placeholder="url" name="lecture" />
+                        </div>
+                        <div class="col-lg-3 ">
+                            <p>Upload Your lecture on DailyMotion or Youtube and paste the url here.</p>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-10">
+                            <input type="submit" value="Submit" class="btn btn-default" />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <!--            <div class="col-md-3 col-sm-4">-->
+            <!--            </div> -->
+
+        </div>
+    </div>
+</div>

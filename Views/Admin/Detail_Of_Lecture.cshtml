@@ -1,0 +1,34 @@
+﻿@model Test_MVC.Models.Lecture
+
+@{
+    Layout = "../Shared/_Admin.cshtml";
+
+}
+<section class="content">
+    <div class="row">
+
+        <form class="form-horizontal " role="form" style="border:double; border-color:aqua" method="post">
+           
+            <div class="form-group">
+                <label class="col-lg-3 control-label" style="font-size:20px">Description: </label>
+                <div class="col-lg-4 ">
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+            <!--Here te video will be rendered from the Cloud/DataBase (We will use the v.Name==url SO.....)-->>
+            <hr/>
+            <div class="form-group">
+                
+                <div class="col-lg-9 " style="">
+                    <iframe frameborder="0" style="width:100%; height:430px" src="@Model.Name"></iframe>
+                </div>
+            </div>
+                    
+                   
+               
+
+</form>
+
+       
+    </div><!-- /.row -->
+</section>
