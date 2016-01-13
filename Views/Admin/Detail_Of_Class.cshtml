@@ -38,7 +38,7 @@
                 </thead>
                 <tbody>
                     @{
-                        List<Subject> list = new VASdb().SubjectClass.Where(x=>x.Class_Id==Model.ClassId).Select(x=>x.Subject).ToList();
+                        List<Subject> list = new db().SubjectClass.Where(x=>x.Class_Id==Model.ClassId).Select(x=>x.Subject).ToList();
                         foreach (var v in list)
                         {
 

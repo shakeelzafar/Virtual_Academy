@@ -21,7 +21,7 @@
 
                 <div style="margin-top:5%; " class="col-lg-6 pull-right">
                     
-                     @{ SubjectClass sub = new VASdb().SubjectClass.First(x=>x.Subject_Id==Model.SubjectId);
+                     @{ SubjectClass sub = new db().SubjectClass.First(x=>x.Subject_Id==Model.SubjectId);
                             foreach(var v in sub.Chapter)
                             { 
                         <div style="float:left; padding-left:5% ; margin-left:5%; ">

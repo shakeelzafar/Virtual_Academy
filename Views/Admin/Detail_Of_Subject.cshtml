@@ -38,7 +38,7 @@
                 </thead>
                 <tbody>
                     @{
-                        SubjectClass list = new VASdb().SubjectClass.First(x => x.Subject_Id == Model.SubjectId);
+                        SubjectClass list = new db().SubjectClass.First(x => x.Subject_Id == Model.SubjectId);
                         foreach (var v in list.Chapter)
                         {
 

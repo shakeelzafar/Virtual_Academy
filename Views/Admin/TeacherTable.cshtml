@@ -44,7 +44,7 @@
                 </thead>
                 <tbody>
 
-                    @{List<UserProfile> list = new VASdb().UserProfile.Where(x => x.Type == "Teacher").ToList();
+                    @{List<UserProfile> list = new db().UserProfile.Where(x => x.Type == "Teacher").ToList();
                     foreach (var v in list)
                     {
 

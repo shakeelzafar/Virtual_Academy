@@ -1,64 +1,42 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@model Test_MVC.Models.UserProfile
+@using Test_MVC.Models
+
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <div class="sidebar-page rmm taxlist graphite">
 
                     <span class="sidebar-title" style="display: block;">Classes</span>
-
+                    @{
+                        List<SubjectClass> list = new VASdb().StudentTeacherClass1.Where(x => x.Teacher_Id == Model.UserId).Select(x=>x.SubjectClass).ToList();
+                    }
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">
-                            <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                        @foreach(var v in list.Select(x=>x.Class))
+                        { 
+                            <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">
+                                <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                                    @v.Name
 
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        9th
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="~/Teacher/SelectChapters">Science Maths</a></li>
-                                        <li><a href="~/Teacher/SelectChapters ">General Maths</a></li>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                           
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            @foreach(var obj in v.SubjectClass.Select(x=>x.Subject))
+                                            { 
+                                            <li><a href="~/Teacher/Class">@obj.Name</a></li>
+                                            
+                                            }
 
-                                    </ul>
-                                </li>
+                                        </ul>
+                                    </li>
 
-                            </ul>
-                        </li>                       
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018">
-                            <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        10th
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="~/Teacher/SelectChapters">Science Maths</a></li>
-                                        <li><a href="~/Teacher/SelectChapters ">General Maths</a></li>
-
-                                    </ul>
-                                </li>
-
-                            </ul>
-
-                        </li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018">
-                            <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        1st Year
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="~/Teacher/SelectChapters">Science Maths</a></li>
-                                        <li><a href="~/Teacher/SelectChapters ">General Maths</a></li>
-
-                                    </ul>
-                                </li>
-
-                            </ul>
-                        </li>                        
+                                </ul>
+                            </li>    
+                        }                   
+                        
 
                     </ul>
                     <hr/>
@@ -72,31 +50,29 @@
                              <option>10th</option>
                            </select>
                              @Scripts.Render("~/bundles/jquery")
-                            <script>
+                             <script>
 
-                                $(document).ready(function () {
+                                 $(document).ready(function () {
 
-                                    $('#ClassSelector').change(function () {
-                                        var value = $('#ClassSelector').val();
-                                        alert(value);
-                                        
+                                     $('#ClassSelector').change(function () {
+                                         
+                                         $.post("/Teacher/getSubjectName", { Name: $('#ClassSelector').val() }, function (data) {
+                                            
+                                             $('#subjectS').empty().append(data.SubjectName)
+                                         });
+                                     });
 
-                                        $("#SubjectSelector").load("<p>No Data</p>");
-                                        
-                                        $("#d1").html("<select><option>9th</option></select>");
-                                    });
-                                });
+                                 });
                              </script>
 
+
                            
-                             <div id="d1">
+                             <div id="subjectS">
                                  <select name="Class">
                                      <option>--Select--</option>
                                  </select>
                              </div>
-                             <div id="SubjectSelector">
-
-                             </div>
+                             
                             </form>
                         </li>
                         

@@ -4,42 +4,44 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="11c01b8c526c498da5162d0039612e89" Name="Diagram1">
-        <EntityTypeShape EntityType="DB.Chapter" Width="1.5" PointX="1.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.Class" Width="1.5" PointX="0.75" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.ClassQuiz" Width="1.5" PointX="8.125" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.Comment" Width="1.5" PointX="5.625" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.Lecture" Width="1.5" PointX="7.5" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.MainTopic" Width="1.5" PointX="3.125" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.Quiz" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.Reply" Width="1.5" PointX="5.625" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.Subject" Width="1.5" PointX="0.875" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB.SubjectClass" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <AssociationConnector Association="DB.fk_ChapterTopicId" ManuallyRouted="false" />
-        <AssociationConnector Association="DB.fk_SubClassId" ManuallyRouted="false" />
-        <AssociationConnector Association="DB.fk_ClassId" ManuallyRouted="false" />
-        <AssociationConnector Association="DB.fk_ClassQuiz_QuizId" ManuallyRouted="false" />
-        <AssociationConnector Association="DB.fk_CommentLectureId" ManuallyRouted="false" />
-        <AssociationConnector Association="DB.fk_ReplyCommentId" ManuallyRouted="false" />
-        <AssociationConnector Association="DB.fk_TopicLectureId" ManuallyRouted="false" />
-        <AssociationConnector Association="DB.fk_TopicQuiz" ManuallyRouted="false" />
-        <AssociationConnector Association="DB.fk_SubjectId" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DB.Result" Width="1.5" PointX="3.625" PointY="5" />
-        <EntityTypeShape EntityType="DB.UserProfile" Width="1.5" PointX="3.25" PointY="0.5" />
-        <AssociationConnector Association="DB.fk_UserCommentId" />
-        <AssociationConnector Association="DB.fk_UserReplyId" />
-        <AssociationConnector Association="DB.fk_ResultQuiz_Id" />
-        <AssociationConnector Association="DB.fk_TeacherLectureId1" />
-        <EntityTypeShape EntityType="DB.StudentTeacherClass" Width="1.5" PointX="7.625" PointY="0.5" />
-        <AssociationConnector Association="DB.fk_ClassQuiz_Id" />
-        <AssociationConnector Association="DB.fk_ClassCommentId1" />
-        <AssociationConnector Association="DB.fk_StudentTeacherClassId1" />
-        <AssociationConnector Association="DB.fk_UserStudent" />
-        <AssociationConnector Association="DB.fk_UserTeacher" />
-        <EntityTypeShape EntityType="DB.Parent" Width="1.5" PointX="5.5" PointY="11.5" />
-        <AssociationConnector Association="DB.fk_UserChildren" />
-        <AssociationConnector Association="DB.fk_UserParent" />
-        <AssociationConnector Association="DB.fk_UserStudentQuiz" />
+      <Diagram DiagramId="485d06fc6fe14e3eba97df3d6b174cb2" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Chapter" Width="1.5" PointX="1.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Class" Width="1.5" PointX="1.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ClassQuiz" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Lecture" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MainTopic" Width="1.5" PointX="3.75" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Parent" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Quiz" Width="1.5" PointX="6" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Reply" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Result" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.STCStudents" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.StudentTeacherClass" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Subject" Width="1.5" PointX="1.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SubjectClass" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="Model.fk_ChapterTopicId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_SubClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_ClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_ClassQuiz_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_ClassQuiz_QuizId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_ResultQuiz_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_ClassCommentId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_CommentLectureId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_ReplyCommentId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_UserCommentId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_TeacherLectureId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_TopicLectureId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_TopicQuiz" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_UserChildren" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_UserParent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_UserReplyId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_UserStudentQuiz" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_StudentId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_StudentTeacherClass_Ids" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_StudentTeacherClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_UserTeacher" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_SubjectId" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -8,7 +8,7 @@
                     <span class="sidebar-title" style="display: block;">Classes</span>
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
                         
-                            @foreach(var v in new VASdb().Class.ToList())
+                            @foreach(var v in new db().Class.ToList())
                             { 
                         
                         <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="~/Class/Index#@v.Name">@v.Name</a></li>
@@ -24,7 +24,7 @@
             <div class="col-md-8" style="padding:0%">
                 
 
-                        @foreach(var v in new VASdb().Class.ToList())
+                        @foreach(var v in new db().Class.ToList())
                             {
                             
                 <div class=" panel panel-body" id="@v.Name">

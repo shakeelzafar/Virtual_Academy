@@ -43,7 +43,7 @@
                 </thead>
                 <tbody>
                     @{
-                        VASdb ctx = new VASdb();
+                        db ctx = new db();
                         List<Class> listOfClass = ctx.Class.ToList();
                         List<int> listOfChapters=null;
                     foreach(var v in listOfClass)
