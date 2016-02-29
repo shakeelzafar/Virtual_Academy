@@ -1,4 +1,5 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@model Test_MVC.Models.SubjectClass
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -12,50 +13,35 @@
             <div class="col-md-7">
                 <div id="">
                     <div>
-                        9th >> Physics
+                        @Model.Class.Name --> @Model.Subject.Name
                     </div>
-                    <form action="~/Teacher/SelectQuestions" class="form-horizontal" role="form">
+                    <form action="~/Teacher/SelectQuestions/@Model.SubClassId" class="form-horizontal" method="post" role="form">
                         <div class="panel panel-success" style="">
 
                             <div class="panel-heading">
                                 <span style=""><b>Capters</b></span>
                             </div>
                             <div class="panel-body">
-                                <hr />
-                                <input type="checkbox" value="ch1" style="margin-right:5%" name="ch1" />Introduction to physics to physics to physics to physics to physics to physics <br>
-                                <hr />
-                                <input type="checkbox" value="ch1" style="margin-right:5%" name="ch1" />Introduction to physics to physics to physics to physics to physics to physics<br>
-                                <hr />
-                                <hr />
-                                <input type="checkbox" value="ch1" style="margin-right:5%" name="ch1" />Introduction to physics to physics to physics to physics to physics to physics<br>
-                                <hr />
-                                <input type="checkbox" value="ch1" style="margin-right:5%" name="ch1" />Introduction to physics to physics to physics to physics to physics to physics<br>
-
+                                @foreach(var v in Model.Chapter)
+                                {
+                                    <hr />
+                                    <input type="checkbox" value="@v.Name" style="margin-right:5%" name="chapter" /> @v.Name<br />
+                                }
 
                             </div>
-                             
+
 
                         </div>
-                        <div class="panel panel-success" style="">
+                        <input type="submit" id="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:; margin-top:5px; margin-bottom:5px" />
 
-                            <div class="panel-heading">
-                                <span style=""><b>Required</b></span>
-                            </div>
-                            <div class="panel-body">
-                                
-                                    <input type="radio" required value="rad1" style="margin-right:5%" name="ch1" />From Pool<br>
-                                    <input type="radio" required value="rad1" style="margin-right:5%" name="ch1" />Your Own<br>
-                                 
-
-
-                            </div>
+                    </form>
+                   
+    </div>
                            
                         </div>
-                        <div>
+                        
                             
-                            <input type="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:; margin-top:5px; margin-bottom:5px" />
-                        </div>
-                    </form>
+                            
 
                 </div>
 

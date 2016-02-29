@@ -1,11 +1,19 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@using Test_MVC.Models
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <div class="sidebar-page rmm taxlist graphite">
 
-                    <span class="sidebar-title" style="display: block;">Features</span>
-                   
+                    <span class="sidebar-title" style="display: block;">Quiz</span>
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">Total Questions</li>
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">Total Marks</li>
+
+
+
+                    </ul>
                 </div>
 
             </div>
@@ -14,140 +22,92 @@
                 <div id="">
 
 
-                    <div>
-                        <br />
-                        <ul style="list-style:none; ">
-                            <li> <b>Course: &nbsp;</b>SubjectName</li>
-                            <li> <b>Instructor: &nbsp;</b>TeacherName</li>
-                        </ul>
-                    </div>
+                    @*<div>
+                            <br />
+                            <ul style="list-style:none; ">
+                                <li> <b>Course: &nbsp;</b>SubjectName</li>
+                                <li> <b>Instructor: &nbsp;</b>TeacherName</li>
+                            </ul>
+                        </div>*@
+                    @{
 
-                    <div class="panel panel-success" style="">
 
-                        <div class="panel-heading">
-                            <span style=""><b>Session</b></span>
-                        </div>
+                        int questId = 1;
 
-                        <div class="panel-body" style="padding:0px">
+                        <div class="panel panel-success" style="">
 
-                            <form action="../Students/StudentSubmitQuiz" class="form-horizontal" role="form">
+                            <div class="panel-heading">
+                                <span style=""><b>Quiz</b></span>
+                            </div>
 
-                                <div class="panel panel-warning" style="">
-                                    <div class="panel-body">
-                                        <div class="col-lg-12">
-                                            <p style="text-align:left"><b>Question: 1</b></p>
-                                            <p style="text-align:left"><b>this is first question and we are testing either it is responsive or not, if it is responcive then this is well n good other wise we will chnage it.</b></p>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionA" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
+                            <div class="panel-body" style="padding:0px">
 
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionB" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionC" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionD" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                            </div>
-                                        </div>
-                                        <div>
-                                        <button class="bln btn-progress" style="width:30%; height:5%"  name="addQuestion" value="Add to Quiz" id="q1a">Add to Quiz</button>
-                                            <button class="bln btn-danger" style="width:40%; height:5%" name="removeQuestion" value="remove from Quiz" id="q1a">Remove from Quiz</button>
+                                <form action="~/Teacher/AddClassQuiz" class="form-horizontal" role="form" method="post">
+                                    @foreach (var query in ViewBag.qList)
+                                    {
                                         
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-warning" style="">
-                                    <div class="panel-body">
-                                        <div class="col-lg-12">
-                                            <p style="text-align:left"><b>Question: 1</b></p>
-                                            <p style="text-align:left"><b>this is first question and we are testing either it is responsive or not, if it is responcive then this is well n good other wise we will chnage it.</b></p>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionA" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionB" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionC" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionD" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                            </div>
-                                        </div>
-                                        <button class="bln btn-progress" style="width:30%; height:5%" name="addQuestion" value="Add to Quiz" id="q1a">Add to Quiz</button>
-                                        <button class="bln btn-danger" style="width:40%; height:5%" name="removeQuestion" value="remove from Quiz" id="q1a">Remove from Quiz</button>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="panel panel-warning" style="">
-                                        <div class="panel-body">
-                                            <div class="col-lg-12">
-                                                <p style="text-align:left"><b>Question: 1</b></p>
-                                                <p style="text-align:left"><b>this is first question and we are testing either it is responsive or not, if it is responcive then this is well n good other wise we will chnage it.</b></p>
-                                            </div>
-                                            <div class="row">
+                                        <div class="panel panel-warning" style="" id="">
+                                            <div class="panel-body">
                                                 <div class="col-lg-12">
-                                                    <div style="padding-right:0%">
-                                                        <input type="radio" name="option" value="optionA" required style="float:left; " />
-                                                    </div>
-                                                    <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas tiona</div>
-                                                    <br />
-
-                                                    <div style="padding-right:0%">
-                                                        <input type="radio" name="option" value="optionB" required style="float:left; " />
-                                                    </div>
-                                                    <div style=" text-align: left; padding-left:10%"> tiona</div>
-                                                    <br />
-                                                    <div style="padding-right:0%">
-                                                        <input type="radio" name="option" value="optionC" required style="float:left; " />
-                                                    </div>
-                                                    <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas </div>
-                                                    <br />
-                                                    <div style="padding-right:0%">
-                                                        <input type="radio" name="option" value="optionD" required style="float:left; " />
-                                                    </div>
-                                                    <div style=" text-align: left; padding-left:10%">op ajdkb  kkas tionaakdjk kkas tiona</div>
-                                                    <br />
+                                                    <p style="text-align:left"><b>Question: @questId</b></p>
+                                                    <p style="text-align:left"><b>@query.Statement</b></p>
                                                 </div>
-                                            </div>
-                                            <button class="bln btn-progress" style="width:30%; height:5%" name="addQuestion" value="Add to Quiz" id="q1a">Add to Quiz</button>
-                                            <button class="bln btn-danger" style="width:40%; height:5%" name="removeQuestion" value="remove from Quiz" id="q1a">Remove from Quiz</button>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div style="padding-right:0%">
+                                                            A):
+                                                           
+                                                        </div>
+                                                        <div style=" text-align: left; padding-left:10%">
+                                                            
+                                                        @query.Option_A
+                                                        </div>
+                                                        <br />
+
+                                                        <div style="padding-right:0%">
+                                                            B):
+                                                        </div>
+                                                        <div style=" text-align: left; padding-left:10%">@query.Option_B</div>
+                                                        <br />
+                                                        <div style="padding-right:0%">
+                                                            C):
+                                                        </div>
+                                                        <div style=" text-align: left; padding-left:10%">@query.Option_C</div>
+                                                        <br />
+                                                        <div style="padding-right:0%">
+                                                            D):
+                                                        </div>
+                                                        <div style=" text-align: left; padding-left:10%">@query.Option_D</div>
+                                                        <br />
+                                                        <br /><div style="padding-right:0%">
+                                                            (Correct):
+                                                        </div>
+                                                        <div style=" text-align: left; padding-left:10%;"><p style="color:red">@query.Correct</p></div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                    <input type="radio" value="Add" style="margin-left:5%" name="@query.QuestionId" /> Add To Quiz<br />
+                                                        </div>
+                                                    <div class="col-lg-2">
+                                                        <input type="radio" value="Add" style="margin-left:5%" name="@query.QuestionId" /> Remove from Quiz<br />
+                                                    </div>
+                                                </div>
+                                             
+
+                                         
+</div>
                                         </div>
-                                    </div>
+
+                                        questId = questId + 1;
+
+                                    }
+
                                     <input type="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:; margin-top:5px; margin-bottom:5px" />
-                                </div>
 
-                            </form>
+
+                                </form>
+                            </div>
                         </div>
-                    </div>
-
+                    }
 
                 </div>
             </div>
@@ -158,3 +118,8 @@
         </div>
     </div>
 </div>
+
+
+
+
+

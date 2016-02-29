@@ -1,0 +1,95 @@
+﻿@model Test_MVC.Models.Lecture
+@using Test_MVC.Models
+@{
+    Layout = null;
+}
+<div class="col-md-7">
+
+    <div style="" id="">
+        @Model.Description
+        <iframe frameborder="0" style="width:100%; height:430px" src="@Model.Name"></iframe>
+    </div>
+
+    <div class="panel panel-primary">
+        @if (@Session["user"] != null)
+        {
+            <form action="../../Student/Add_Comment/@Model.LectureId" method="post">
+
+
+                <div class="panel-body " style="background-color:#ccc">
+                    <img src="../../Content/images/icon.png" style="float:left; margin-right:0%" width="8%" height="8%" />
+
+                    <textarea style="width:90%; height:90%" class="pull-right" name="Comment" placeholder="Ask a Question..."></textarea>
+                </div>
+                <input type="submit" value="Comment" class="btn btn-circle">
+            </form>
+        }
+    </div>
+    @foreach (var v in Model.Comment)
+    {
+        <div class="">
+
+            <div style="margin-left:">
+                <p><img src="../../Content/images/ width=" 40px" height="40px" /> <a style="margin-right:3%">@v.UserProfile.UserName</a>@v.Comment1</p>
+            </div>
+            <hr />
+            <a style="font-size:9px">All Replies</a>
+            @if (@Session["user"] != null)
+            {
+                <a style="font-size:9px" id="answer" onclick="answer(@v.CommentId)"> &nbsp;&nbsp;&nbsp;&nbsp; Answer this Question</a>
+            }
+            <hr />
+
+
+
+            @Scripts.Render("~/bundles/jquery")
+            <script>
+                function ReplyofComment(value) {
+                    $.post("/Student/SubmitReply", { id: value, Name: $('#Reply' + value).val() }, function (data) {
+
+                        $('#' + value).append(data.result);
+                        alert(data.result);
+                        $("#pId").hide();
+                        var data = " <p id=" + "\"" + "pId" + "\"" + ">   <img src=" + "\"" + "../../Content/images/ width=" + "\"" + " 40px" + "\"" + " height=" + "\"" + "40px" + "\"" + " style=" + "\"" + "margin-right:3%" + "\"" + " />";
+                        data += "<input type=" + "\"" + "text" + "\"" + " name=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "Reply" + value + "\"" + " placeholder=" + "\"" + "Answer this Question..." + "\"" + " />";
+                        data += "<input type=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "ReplyofComment(" + value + ")" + "\"" + " value=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "submitReply" + "\"" + "  /></p>";
+                        $("#" + value).append(data);
+                        //  $("#"+value).show();
+                    });
+                }
+                function answer(id) {
+                    var data = " <p id=" + "\"" + "pId" + "\"" + ">   <img src=" + "\"" + "../../Content/images/ width=" + "\"" + " 40px" + "\"" + " height=" + "\"" + "40px" + "\"" + " style=" + "\"" + "margin-right:3%" + "\"" + " />";
+                    data += "<input type=" + "\"" + "text" + "\"" + " name=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "Reply" + id + "\"" + " placeholder=" + "\"" + "Answer this Question..." + "\"" + " />";
+                    data += "<input type=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "ReplyofComment(" + id + ")" + "\"" + " value=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "submitReply" + "\"" + "  /></p>";
+                    $("#" + id).append(data);
+                }
+
+                $(document).ready(function () {
+                    //$("#ansdiv").hide();
+                    // $("#commId").hide();
+                    $('#Reply').change(function () {
+                        alert($('#Reply').val());
+                        $("#submitReply").show();
+                    });
+
+
+                });
+            </script>
+
+            <div style="margin-left:8%" id="@v.CommentId" class="col-lg-12">
+                @foreach (var obj in v.Reply)
+                {
+                    <div style="margin-left:0%">
+                        <p><img src="../../Content/images/ width=" 40px" height="40px" /> <a style="margin-right:3%">@obj.UserProfile.UserName</a>@obj.Reply1</p>
+                    </div>
+                    <hr />
+                }
+
+
+            </div>
+
+        </div>
+    }
+
+
+</div>

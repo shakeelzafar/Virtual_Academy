@@ -1,0 +1,103 @@
+﻿
+@using Test_MVC.Models
+<div id="content_wrapper" class="content single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar-page rmm taxlist graphite">
+
+                    <span class="sidebar-title" style="display: block;">Quiz</span>
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">Total Questions</li>
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">Total Marks</li>
+                        
+                        
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-md-7">
+                <div id="">
+
+
+                    @*<div>
+                        <br />
+                        <ul style="list-style:none; ">
+                            <li> <b>Course: &nbsp;</b>SubjectName</li>
+                            <li> <b>Instructor: &nbsp;</b>TeacherName</li>
+                        </ul>
+                    </div>*@
+                    @{
+                        
+                       
+                        int questId=1;
+                        
+                    <div class="panel panel-success" style="">
+
+                        <div class="panel-heading">
+                            <span style=""><b>Quiz</b></span>
+                        </div>
+                       
+                        <div class="panel-body" style="padding:0px">
+
+                            <form action="~/Quiz/QuizResult" class="form-horizontal" role="form" method="post">
+                                @foreach(var query in ViewBag.qList)
+                                { 
+                                <div class="panel panel-warning" style="" id="">
+                                    <div class="panel-body">
+                                        <div class="col-lg-12">
+                                            <p style="text-align:left"><b>Question: @questId</b></p>
+                                            <p style="text-align:left"><b>@query.Statement</b></p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div style="padding-right:0%">
+                                                    <input type="radio" name="@query.QuestionId" value="@query.Option_A" required style="float:left; " />
+                                                </div>
+                                                <div style=" text-align: left; padding-left:10%">@query.Option_A</div>
+                                                <br />
+
+                                                <div style="padding-right:0%">
+                                                    <input type="radio" name="@query.QuestionId" value="@query.Option_B" required style="float:left; " />
+                                                </div>
+                                                <div style=" text-align: left; padding-left:10%">@query.Option_B</div>
+                                                <br />
+                                                <div style="padding-right:0%">
+                                                    <input type="radio" name="@query.QuestionId" value="@query.Option_C" required style="float:left; " />
+                                                </div>
+                                                <div style=" text-align: left; padding-left:10%">@query.Option_C</div>
+                                                <br />
+                                                <div style="padding-right:0%">
+                                                    <input type="radio" name="@query.QuestionId" value="@query.Option_D" required style="float:left; " />
+                                                </div>
+                                                <div style=" text-align: left; padding-left:10%">@query.Option_D</div>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                     
+                                   questId = questId + 1;
+                               
+                                }
+                              
+                                    <input type="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:; margin-top:5px; margin-bottom:5px" />
+                                
+
+                            </form>
+                        </div>
+                    </div>
+                    }
+
+                </div>
+            </div>
+
+            <!--            <div class="col-md-3 col-sm-4">-->
+            <!--            </div> -->
+
+        </div>
+    </div>
+</div>

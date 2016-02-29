@@ -1,4 +1,5 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@using Test_MVC.Models
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -18,63 +19,109 @@
 
             </div>
 
+            @{
+                int teacherId = (int)Session["Id"];
+                db ctx = new db();
+                List<StudentTeacherClass> listOfSTC = ctx.StudentTeacherClass.Where(x => x.Teacher_Id == teacherId).ToList();
+                List<Class> clas = new List<Class>();
+                foreach(var stc in listOfSTC)
+                {
+                    clas.Add(stc.SubjectClass.Class);
+                }
+            }
             <div class="col-md-7">
-                <form action="~/Admin/Add_Product" class="form-horizontal" role="form" style="border:double; border-color:aqua" method="post">
+                <form action="~/Teacher/Add_Lecture" class="form-horizontal" role="form" style="border:double;" method="post">
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label" style="font-size:20px">Class: </label>
                         <div class="col-lg-3 ">
-                            <select id="ClassSelector" name="category">
-
-                                <option>9th</option>
-                                <option>10th</option>
-                                <option>1st Year</option>
-                                <option>2nd Year</option>
-
-                            </select>
-                        </div>
-                    </div><div class="form-group">
-                        <label class="col-lg-3 control-label" style="font-size:20px">Subject: </label>
-                        <div class="col-lg-3 ">
-                            <select id="SubjectSelector" name="category">
-
-                                <option>Physics</option>
-                                <option>Chemistry</option>
-                                <option>Biology</option>
-                                <option>Mathematics</option>
+                            <select id="ClassSelector" name="Class">
+                                <option>--Select--</option>
+                                @foreach(var stc in clas)
+                                {
+                                <option >@stc.Name</option>    
+                                }
+                                
+                                
 
                             </select>
                         </div>
-                    </div><div class="form-group">
+                        @Scripts.Render("~/bundles/jquery")
+                        <script>
+
+                            $(document).ready(function () {
+
+                                $('#ClassSelector').change(function () {
+                                    var Email = $('#ClassSelector').val();
+
+                                    //alert('User Name = ' + Email);
+
+                                    $.post("/Admin/getSubjectName", { Name: Email }, function (data) {
+
+                                        //alert(data.SubjectName);
+                                        $('#subjectS').empty().append(data.SubjectName)
+                                    });
+
+
+
+                                });
+
+                            });
+                        </script>
+
+
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" style="font-size:20px">Subject: </label>
+                            <div class="col-lg-3 " id="subjectS">
+                                <select id="SubjectSelector" name="Subject">
+                                    <option>--Select--</option>
+                                </select>
+                            </div>
+                        </div>
+                        @Scripts.Render("~/bundles/jquery")
+                        <script>
+
+                            function ChapterSelect(id) {
+                               // alert(id);
+                                $.post("/Admin/getChapterName", {Name:$("#ClassSelector").val(), ID: id }, function (data) {
+
+                                   // alert(data.SubjectName);
+                                    $('#chapterS').empty().append(data.SubjectName)
+                                });
+                            }
+                        </script>
+                     </div><div class="form-group">
                         <label class="col-lg-3 control-label" style="font-size:20px">Chapter: </label>
-                        <div class="col-lg-3 ">
-                            <select id="SubjectSelector" name="category">
+                        <div class="col-lg-3 " id="chapterS">
+                            <select id="ChapterSelector" name="ChapterName">
 
-                                <option>Introduction to .....</option>
-                                <option>Application of the .....</option>
-                                <option>Study of Maths</option>
-                                <option>Study of Physics</option>
-                                <option>Study of Maths</option>
-                                <option>Study of Physics</option>
-                                <option>Study of Maths</option>
-                                <option>Study of Physics</option>
+                                <option >--Select--</option>
+                                
 
                             </select>
                         </div>
                     </div>
+                    @Scripts.Render("~/bundles/jquery")
+                    <script>
+
+                        function MainTopicSelect(id)
+                        {
+                            $.post("/Admin/getMainTopic", { ID: id }, function (data) {
+
+                                //alert(data.SubjectName);
+                                $('#mainTopicS').empty().append(data.SubjectName)
+                            });
+                        }
+                    </script>
+
                     <div class="form-group">
                         <label class="col-lg-3 control-label" style="font-size:20px">Main-Topic: </label>
-                        <div class="col-lg-3 ">
-                            <select id="MainTopicSelector" name="MainTopicSelector">
+                        <div class="col-lg-3 " id="mainTopicS">
+                            <select id="MainTopicSelector" name="MainTopicName">
 
-                                <option>Introduction to .....</option>
-                                <option>Application of the .....</option>
-                                <option>Study of Maths</option>
-                                <option>Study of Physics</option>
-                                <option>Study of Maths</option>
-                                <option>Study of Physics</option>
-                                <option>Study of Maths</option>
-                                <option>Study of Physics</option>
+                                <option>--Select--</option>
+                                
 
                             </select>
                         </div>
@@ -86,13 +133,13 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label" style="font-size:20px">Lecture: </label>
                         <div class="col-lg-3 ">
-                            <input type="text" placeholder="description" name="lecture"  />
+                            <input type="text" placeholder="description" name="Description"  />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label" style="font-size:20px">URL: </label>
                         <div class="col-lg-3 ">
-                            <input type="text" placeholder="url" name="lecture" />
+                            <input type="text" placeholder="url" name="Name" />
                         </div>
                         <div class="col-lg-3 ">
                             <p>Upload Your lecture on DailyMotion or Youtube and paste the url here.</p>

@@ -1,341 +1,190 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@model Test_MVC.Models.SubjectClass
+@using Test_MVC.Models
+@{
+    db ctx = new db();
+    int id = (Int32)Session["Id"];
+    List<int> nextId = ctx.STCStudents.Where(x => x.Student_Id == id).Select(x => x.STC_Id).ToList();
+    List<int> otherIds = Model.StudentTeacherClass.Where(x => x.ClassSubjectId == Model.SubClassId).Select(x => x.StudentTeacherClassId).ToList();
+    int STCID = 0;
+    foreach (var v in nextId)
+    {
+        foreach (var val in otherIds)
+        {
+            if (v == val)
+            {
+                STCID = v;
+                break;
+            }
+        }
+    }
+}
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3 float-left">
                 <div class="sidebar-page rmm taxlist graphite">
 
-                    <span class="sidebar-title" style="display: block;">9th</span>
+                    <span class="sidebar-title" style="display: block;">@Model.Subject.Name</span>
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../Class/Subject">Physics</a></li>
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../Class/Subject">Chemistry</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../Class/Subject">Biology</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../Class/Subject">Maths</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../Class/Subject">Computer</a></li>
+                        @foreach (var v in Model.Chapter)
+                        {
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../../Student/Class/@Model.SubClassId#@v.Name">@v.Name</a></li>
+                        }
+
 
                     </ul>
+                   
+                    
+                    <span id="NoId" class="sidebar-title" style="display: block;">Attemp Quiz</span>
+
+                    <ul id="QuizClick" class="rmm-main-list" style="display: block;">
+                        @{
+                        StudentTeacherClass st = ctx.StudentTeacherClass.First(x => x.StudentTeacherClassId == STCID);
+                        
+                        <li id="from" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../../Student/AttemptQuiz/@st.StudentTeacherClassId">Quiz</a></li>
+                        
+                        }
+
+                    </ul>
+                    
                 </div>
 
             </div>
+         
             <div class="col-md-2 pull-right" style="margin-top:4%">
                 <div class=" panel panel-success ">
                     <div class="panel-heading">
-                        Notifications
+
+                        Class Members @Model.StudentTeacherClass.First(x => x.ClassSubjectId == Model.SubClassId).STCStudents.Count()
                     </div>
                     <div class="panel-body">
+
                         <div>
-                            <a href="~/Quiz/SelectedQuiz">A new Quiz has been posted in this class see here...</a>  
-                            
+                           
+                            @Html.HiddenFor(model => STCID, new { STCID="STCID"})
+                            <label>Add New:</label>
+                            <div id="user">
+                                <input type="text" placeholder="Enter email" style="width:80%; " id="member" name="memeber" />
+                            </div>
+
                         </div>
-                        <hr/>
-                        <div>
-                            <a href="~/Class/Topic">A new lecture has been posted in this class see here...</a>
-                            
+                        <div id="submitdiv">
                         </div>
+
+                        <div id="subjectS"></div>
+
                     </div>
-                   
-                
+                    @Scripts.Render("~/bundles/jquery")
+                    <script>
+
+                        function AddStudent() {
+                            alert("Add Student Called " + $("#member").val() + "  " + $('#STCID').val());
+                            $.post("/Teacher/AddSTCStudent", { member: $("#member").val(), STCID: $('#STCID').val() }, function (data) {
+                                var count = "Class Members: ";
+                                count += data.CountOfMembers;
+                                $("#heading").empty().append(count);
+                            });
+
+
+                        }
+                        function myFunction(id) {
+                            alert("This user s" + id);
+
+                            $.post("/Teacher/getStudent", { UserId: id }, function (data) {
+
+                                $('#user').empty().append(data.Name);
+                                $("#list").hide();
+                                alert(data.Name);
+                                var data = "<input type=" + "\"" + "submit" + "\"" + " value=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "AddStudent()" + "\"" + " id=" + "\"" + "submit" + "\"" + ">";
+                                $("#submitdiv").append(data);
+                            });
+
+
+                            //    document.getElementById("uName").innerText(id);
+
+                        }
+
+                        $(document).ready(function () {
+
+                            $("#from").hide();
+                            $("#own").hide();
+                            $('#member').change(function () {
+                                alert($('#member').val());
+
+                                $.post("/Teacher/getStudentsName", { Name: $('#member').val(), stcId: $('#STCID').val() }, function (data) {
+
+                                    $('#subjectS').empty().append(data.StudentName);
+                                    alert(data.StudentName);
+                                });
+
+                            });
+                            $("#NoId").click(function clickForQuiz() {
+                                //$("#QuizClick").show();
+                                $("#from").show();
+                                $("#own").show();
+                            });
+
+                        });
+                    </script>
+
+
+
+
+
+
 
                 </div>
+
             </div>
 
-            <div id="col-md-7" class="float-left" style="padding:0%; margin-top:0%; padding-top:0%">
-
-
-
-                <h1 class="page-header">Panels and Wells</h1>
-
-
-                <div class="col-md-7">
-                    <div class="jumbotron">
-                        <h1>Jumbotron</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing.</p>
-                        <p>
-                            <a class="btn btn-primary btn-lg" role="button">Learn more</a>
-                        </p>
-                    </div>
-                    <br />
-                    <h3>Physics</h3>
-                    <div class="">
-                        <div class=" panel panel-primary ">
-                            <div class="panel-heading">
-                                Introduction to Physics
-                            </div>
-                            <div class="panel-body">
-                                <img src="C:/Users/Shakeel-Zafar/Documents/Visual Studio 2013/Projects/fyp/fyp/Content/images/member2.png" style="float:left; margin-right:2%" width="10%" height="0%"></img>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
 
 
 
 
+            <div class="col-md-7" style="padding:0%">
+                @foreach (var v in Model.Chapter)
+                {
+
+                    <div class=" panel panel-body" id="@v.Name">
+                        <div>
+                            <br />
+                            <h3>Chapter-@v.ChapterNo . @v.Name</h3>
+                            <div class="">
+                                <div class=" panel panel-primary ">
+                                    <div class="panel-heading" style="background-color:darkcyan">
+                                        Total Main Topics: @v.MainTopic.Count()
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <div>
+
+                                            @foreach (var data in v.MainTopic)
+                                            {
+                                                <div class="col-md-5">
+                                                    <a href="../../Student/Topic/@data.MainTopicId">Topic No @data.MainTopicNo . @data.Name  </a>  <hr />
+
+                                                </div>
+                                            }
+
+                                        </div>
 
 
+                                    </div>
 
+                                </div>
 
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Branches of Physics
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                <!-- /.col-lg-4 -->
                             </div>
 
                         </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Thermodynamics
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
 
-                        </div>
                     </div>
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Simple Harmonic Motion
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
+                }
 
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <a href="../Class/Subject"><button class="btn-progres col-lg-2" style="margin-left:38%">See All</button></a>
-                    </div>
-                    <br />
-                    <h3>Mathematic</h3>
-
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Introduction to Maths
-                            </div>
-                            <div class="panel-body">
-                                <img src="C:/Users/Shakeel-Zafar/Documents/Visual Studio 2013/Projects/fyp/fyp/Content/images/member2.png" style="float:left; margin-right:2%" width="10%" height="0%"></img>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Branches of Mathematics
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Algebra
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Geomatry
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <a href="../Class/Subject"><button class="btn-progres col-lg-2" style="margin-left:38%">See All</button></a>
-                    </div>
-                    <br />
-                    <h3>Chemistry</h3>
-
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Introduction to Chemistry
-                            </div>
-                            <div class="panel-body">
-                                <img src="C:/Users/Shakeel-Zafar/Documents/Visual Studio 2013/Projects/fyp/fyp/Content/images/member2.png" style="float:left; margin-right:2%" width="10%" height="0%"></img>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Branches of Chemisty
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                InOrganic Chmistry
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Organic Chemistry
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <a href="../Class/Subject"><button class="btn-progres col-lg-2" style="margin-left:38%">See All</button></a>
-                    </div>
-                    <br />
-                    <h3>Biology</h3>
-
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Introduction to Biology
-                            </div>
-                            <div class="panel-body">
-                                <img src="C:/Users/Shakeel-Zafar/Documents/Visual Studio 2013/Projects/fyp/fyp/Content/images/member2.png" style="float:left; margin-right:2%" width="10%" height="0%"></img>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Branches of Biology
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Human Parts of Body
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Plant Details
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <a href="../Class/Subject"><button class="btn-progres col-lg-2" style="margin-left:38%">See All</button></a>
-                    </div>
-                    <br />
-                    <h3>Computer</h3>
-
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Introduction to Computer
-                            </div>
-                            <div class="panel-body">
-                                <img src="C:/Users/Shakeel-Zafar/Documents/Visual Studio 2013/Projects/fyp/fyp/Content/images/member2.png" style="float:left; margin-right:2%" width="10%" height="0%"></img>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Branches of Physics
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Thermodynamics
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Simple Harmonic Motion
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div>
-                        <a href="../Class/Subject"><button class="btn-progres col-lg-2" style="margin-left:38%">See All</button></a>
-                    </div>
-
-                    <!-- /.col-md-7 -->
-                </div>
-                <!-- /.row -->
             </div>
-            <!-- /.row -->
+
+
+
 
 
         </div>

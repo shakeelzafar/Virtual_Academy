@@ -1,21 +1,30 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@model Test_MVC.Models.UserProfile
+@using Test_MVC.Models
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <div class="sidebar-page rmm taxlist graphite">
-
+                    
                     <span class="sidebar-title" style="background-color: darkcyan;">Classes</span>
+                   
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="~/Student/Class">9th</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="~/Student/Class">10th</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="~/Student/Class">2nd Year</a></li>
+                        @{
+                            List<UserProfile> stcSID = Model.STCStudents.Select(x => x.StudentTeacherClass).Select(x=>x.UserProfile).ToList();
+                            int i = 0;
+                        }
+                        @foreach (var v in Model.STCStudents.Select(x => x.StudentTeacherClass).Select(x => x.SubjectClass))
+                        {
+                            <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">
+                                
+                                <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                                    @v.Class.Name - @stcSID[i++].UserName
+                                    
+                                   <li><a href="~/Student/Class/@v.SubClassId">@v.Subject.Name</a></li>
 
-                    </ul>
-                      
-                    <span class="sidebar-title" style="background-color: darkcyan;">Quiz</span>
-                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="~/Quiz/Index">Attemp</a></li>
-                       
+                                </ul>
+                            </li>
+                        }
 
                     </ul>
                     
@@ -31,54 +40,109 @@
 
             <div class="col-md-7">
 
+               
+                @{
+                    List<Comment> listOfComment=new List<Comment>();
+                    try { 
+                    List<StudentTeacherClass> comm=new db().STCStudents.Where(x=>x.Student_Id==Model.UserId).Select(x=>x.StudentTeacherClass).ToList();
+                    
+                    
+                    foreach(var v in comm)
+                    {                   
+                        foreach (var value in new db().Comment.Where(x => x.StudentTeacherClass_Id == v.StudentTeacherClassId).ToList())
+                        { 
+                            listOfComment.Add(value);
+                        }
+                    }
+                    }
+                    catch(Exception e)
+                    { 
+                    }
+                }
+                
                 <div class="panel panel-primary">
 
-                    <div class="panel-body " style="background-color:#ccc">
-                        <img src="C:/Users/Shakeel-Zafar/Documents/Visual Studio 2013/Projects/fyp/fyp/Content/images/icon.png" style="float:left; margin-right:0%" width="8%" height="0%"></img>
-                        <textarea style="width:90%; height:90%" class="pull-right" placeholder="New Post..."></textarea>
-                    </div>
+                    <form action="../../Student/Add_ClassComment/@Model.STCStudents.First(x=>x.Student_Id==Model.UserId).STC_Id" method="post">
+                        <div class="panel-body " style="background-color:#ccc">
+                            <img src="../../Content/images/icon.png" style="float:left; margin-right:0%" width="8%" height="8%" />
+
+                            <textarea style="width:90%; height:90%" class="pull-right" name="Comment" placeholder="Ask a Question..."></textarea>
+                        </div>
+                        <input type="submit" value="Comment" class="btn btn-circle">
+                    </form>
 
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="">
-                        <p>I don't understand the value of this little butterfly. Why bunny got terrified.</p>
-                    </div>
-                    <div class="panel-body " style="margin-left:5%">
+                @if(listOfComment.Count!=0)
+                { 
+                foreach (var v in listOfComment)
+                {
+                    <div class="">
 
-                        <p>Answer of this question will be here.</p>
-                    </div>
+                        <div style="margin-left:">
+                            <p><img src="../../Content/images/ width=" 40px" height="40px" /> <a style="margin-right:3%">@v.UserProfile.UserName</a>@v.Comment1</p>
+                        </div>
+                        <hr />
+                        <a style="font-size:9px">All Replies</a>
+                        @{
+                    int IdCom = v.CommentId * -1;
+                        }
+                        <a style="font-size:9px" id="answer" onclick="answer(@v.CommentId)"> &nbsp;&nbsp;&nbsp;&nbsp; Answer this Question</a>
+                     
+                        <hr />
+                      
 
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="">
-                        <p>I don't understand the value of this little butterfly. Why bunny got terrified.</p>
-                    </div>
-                    <div class="panel-body " style="margin-left:5%">
+                        @Scripts.Render("~/bundles/jquery")
+                        <script>
+                            function ReplyofComment(value)
+                            {
+                                $.post("/Student/SubmitReply", {id:value, Name: $('#Reply'+value).val()}, function (data) {
 
-                        <p>Answer of this question will be here.</p>
-                    </div>
+                                    $('#'+value).append(data.result);
+                                    alert(data.result);
+                                    $("#pId").hide();
+                                    var data=" <p id="+"\""+"pId"+"\""+">   <img src="+"\""+"../../Content/images/ width="+"\""+" 40px"+"\""+" height="+"\""+"40px"+"\""+" style="+"\""+"margin-right:3%"+"\""+" />";
+                                    data+="<input type="+"\""+"text"+"\""+" name="+"\""+"Reply"+"\""+" id="+"\""+"Reply"+value+"\""+" placeholder="+"\""+"Answer this Question..."+"\""+" />";
+                                    data += "<input type=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "ReplyofComment("+value+")" + "\"" + " value=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "submitReply" + "\"" + "  /></p>";
+                                    $("#"+value).append(data);
+                                  //  $("#"+value).show();
+                                });
+                            }
+                            function answer(id) {
+                                var data=" <p id="+"\""+"pId"+"\""+">   <img src="+"\""+"../../Content/images/ width="+"\""+" 40px"+"\""+" height="+"\""+"40px"+"\""+" style="+"\""+"margin-right:3%"+"\""+" />";
+                                data+="<input type="+"\""+"text"+"\""+" name="+"\""+"Reply"+"\""+" id="+"\""+"Reply"+id+"\""+" placeholder="+"\""+"Answer this Question..."+"\""+" />";
+                                data += "<input type=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "ReplyofComment("+id+")" + "\"" + " value=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "submitReply" + "\"" + "  /></p>";
+                                $("#"+id).append(data);
+                            }
+                            
+                            $(document).ready(function () {
+                                //$("#ansdiv").hide();
+                               // $("#commId").hide();
+                                $('#Reply').change(function () {
+                                    alert($('#Reply').val());
+                                    $("#submitReply").show();
+                                });
 
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="">
-                        <p>I don't understand the value of this little butterfly. Why bunny got terrified.</p>
-                    </div>
-                    <div class="panel-body " style="margin-left:5%">
 
-                        <p>Answer of this question will be here.</p>
+                            });
+                        </script>
+                     <div style="margin-left:8%" id="@v.CommentId" class="col-lg-12">
+                        @foreach (var obj in v.Reply)
+                        {
+                            <div style="margin-left:0%">
+                                <p><img src="../../Content/images/" width=" 40px" height="40px" /> <a style="margin-right:3%">@obj.UserProfile.UserName</a>@obj.Reply1</p>
+                            </div>
+                            <hr />
+                        }
+                         
+                       
                     </div>
-
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="">
-                        <p>I don't understand the value of this little butterfly. Why bunny got terrified.</p>
                     </div>
-                    <div class="panel-body " style="margin-left:5%">
-
-                        <p>Answer of this question will be here.</p>
-                    </div>
-
-                </div>
+                }
+                }
+                else
+                {
+                    <h3>No Comment is here.</h3>
+                }
 
             </div>
 

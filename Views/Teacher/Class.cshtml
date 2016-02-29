@@ -1,61 +1,128 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@model Test_MVC.Models.SubjectClass
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3 float-left">
                 <div class="sidebar-page rmm taxlist graphite">
 
-                    <span class="sidebar-title" style="display: block;">9th</span>
+                    <span class="sidebar-title" style="display: block;">@Model.Subject.Name</span>
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../../Teacher/Class">1. Introduction to Algebra</a></li>
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../../Teacher/Class">2. Trignometry</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../../Teacher/Class">3. Intro to Biology</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../../Teacher/Class">4. Intro to Nothing of Maths</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../../Teacher/Class">5. Now the scene is Computer</a></li>
-
-                    </ul>
-                    <span class="sidebar-title" style="display: block;">Quiz</span>
-                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                        @foreach(var v in Model.Chapter)
+                        {<li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../../Teacher/Class">@v.Name</a></li>
+                        }
                         
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                               Add
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="~/Teacher/SelectChapters">Science Maths</a></li>
-                                <li><a href="~/Teacher/SelectChapters "></a>General Maths</li>
-                                
-                            </ul>
-                        </li>
 
                     </ul>
+                    <span class="sidebar-title" style="display: block;"><a href="../../Teacher/AddLecture">Add New Lecture</a></span>
+                    <span  id="NoId" class="sidebar-title" style="display: block;">Add Quiz</span>
+                    <ul id="QuizClick" class="rmm-main-list" style="display: block;">
+                       
+                        <li id="from" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../../Teacher/SelectChapters/@Model.SubClassId">From Pool</a></li>
+                        <li id="own" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../../Teacher/AddQuestions/@Model.SubClassId">Your Own</a></li>
+
+
+                    </ul>
+                   
                 </div>
 
             </div>
             <div class="col-md-2 pull-right" style="margin-top:4%">
                 <div class=" panel panel-success ">
-                    <div class="panel-heading">
-                        Class Members (67)
+                    <div class="panel-heading" id="heading">
+                       
+                        Class Members @Model.StudentTeacherClass.First(x => x.ClassSubjectId == Model.SubClassId).STCStudents.Count()
                     </div>
                     <div class="panel-body">
-                        <form action="" class="" style="" >
-                            <label>Add New:</label>
-                        <input type="text" placeholder="Enter email" style="width:80%; " name="memeber"/>
-                            </form>
+                        
+                            <div>
+                                @{
+                                    int id =(Int32)Session["Id"];
+                                    int STCID = Model.StudentTeacherClass.First(x => x.Teacher_Id == id && x.ClassSubjectId == Model.SubClassId).StudentTeacherClassId;
+                                }
+                                @Html.HiddenFor(model=>STCID, new { id="STCID" })
+                                <label>Add New:</label>
+                                <div id="user">
+                                <input type="text" placeholder="Enter email" style="width:80%; " id="member" name="memeber" />
+                                    </div>
+                            
+                            </div>
+                          <div id="submitdiv">
+                              </div>
+
+                            <div id="subjectS"></div>
+                            
                     </div>
+                    @Scripts.Render("~/bundles/jquery")
+                    <script>
+                       
+
+                        function AddStudent()
+                        {
+                            alert("Add Student Called " + $("#member").val() + "  " + $('#STCID').val());
+                            $.post("/Teacher/AddSTCStudent", {member:$("#member").val(), STCID:$('#STCID').val() }, function(data){
+                                var count ="Class Members: ";
+                                count+=data.CountOfMembers;
+                                $("#heading").empty().append(count);
+                            });
+
+                            
+                        }
+                        function myFunction(id) {
+                            alert("This user s" + id);
+                           
+                            $.post("/Teacher/getStudent", { UserId:id }, function (data) {
+
+                                $('#user').empty().append(data.Name);
+                                $("#list").hide();
+                                alert(data.Name);
+                                var data = "<input type=" + "\"" + "submit" + "\"" + " value=" + "\"" + "submit" + "\"" +" onclick="+"\""+"AddStudent()"+"\""+ " id=" + "\"" + "submit" + "\"" + ">";
+                                $("#submitdiv").append(data);
+                            });
+                           
+                           
+                        //    document.getElementById("uName").innerText(id);
+                          
+                        }
+
+                        $(document).ready(function () {
+                           // $("#QuizClick").hide();
+                            $("#from").hide();
+                            $("#own").hide();
+                           
+                            $('#member').change(function () {
+                                alert($('#member').val());
+
+                                $.post("/Teacher/getStudentsName", { Name: $('#member').val(), stcId: $('#STCID').val() }, function (data) {
+
+                                    $('#subjectS').empty().append(data.StudentName);
+                                    alert(data.StudentName);
+                                });
+
+                            });
+                            $("#NoId").click(function clickForQuiz() {
+                                //$("#QuizClick").show();
+                                $("#from").show();
+                               $("#own").show();
+                            });
+                            
+
+                        });
+                    </script>
+
+
 
                 </div>
             </div>
 
      
             <div class="col-md-7" style="padding:0%">
-                @for (int j = 0; j < 17; j++ )
+                @foreach(var v in Model.Chapter)
                 { 
  
-                    <div class=" panel panel-body" id="Chapter-@j">
+                    <div class=" panel panel-body" id="Chapter-@v.ChapterId">
                         <div>
                             <br />
-                            <h3>Chapter-@j</h3>
+                            <h3>Chapter-@v.ChapterNo . @v.Name</h3>
                             <div class="">
                                 <div class=" panel panel-primary ">
                                     <div class="panel-heading" style="background-color:darkcyan">
@@ -65,14 +132,14 @@
                                     <div class="panel-body">
                                         <div>
                                            
-                                            @for (int i = 0; i < 11; i++)
+                                            @foreach(var data in v.MainTopic)
                                             {
                                                 <div class="col-md-5">
-                                                     <a href="../Teacher/Topic/1">Topic No @i</a>  <hr />
+                                                     <a href="../../Teacher/Topic/@data.MainTopicId">Topic No @data.MainTopicNo . @data.Name  </a>  <hr />
 
                                                 </div>
                                             }
-                                            <h4>Total Lectures : 59</h4>
+                                            
                                         </div>
 
 

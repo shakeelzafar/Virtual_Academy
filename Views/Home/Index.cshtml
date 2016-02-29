@@ -50,7 +50,10 @@
     </div><!-- /#templatemo-carousel -->
 </div>
 
-<div class="templatemo-welcome" id="templatemo-welcome">
+
+@if(Session["Id"]==null)
+{ 
+    <div class="templatemo-welcome" id="templatemo-welcome">
     <div class="container">
         <div class="templatemo-slogan text-center">
             <span class="txt_darkgrey">Welcome to </span><span class="txt_orange">Virtual Academy</span>
@@ -58,7 +61,6 @@
         </div>
     </div>
 </div>
-
 <div class="templatemo-service">
     <div class="container">
         <div class="row">
@@ -66,7 +68,7 @@
                 <div class="templatemo-service-item">
                     <div>
                         <img src="~/Content/images/student.png" alt="icon" />
-                        <a href="../Student/Index"><span class="templatemo-service-item-header">STUDENT PANEL</span></a>
+                        <a href="../User/Register"><span class="templatemo-service-item-header">STUDENT PANEL</span></a>
                     </div>
                     <p>Student Panel goes here</p>
                     <div class="text-center">
@@ -82,7 +84,7 @@
                 <div class="templatemo-service-item">
                     <div>
                         <img src="~/Content/images/teacher.png" alt="icon" />
-                        <a href="../Teacher/Index"><span class="templatemo-service-item-header">TEACHER PANEL</span></a>
+                        <a href="../User/Register"><span class="templatemo-service-item-header">TEACHER PANEL</span></a>
                     </div>
                     <p>Teacher Panel goes here</p>
                     <div class="text-center">
@@ -98,7 +100,7 @@
                 <div class="templatemo-service-item">
                     <div>
                         <img src="~/Content/images/parent.jpg" alt="icon" />
-                        <a href="../Parent/Index"><span class="templatemo-service-item-header">PARENT PANEL</span></a>
+                        <a href="../User/Register"><span class="templatemo-service-item-header">PARENT PANEL</span></a>
                     </div>
                     <p>Parents panel goes here.</p>
                     <div class="text-center">
@@ -112,7 +114,7 @@
         </div>
     </div>
 </div>
-
+}
 <div class="templatemo-team" id="templatemo-about">
     <div class="container">
         <div class="row">
@@ -128,7 +130,7 @@
             <li class="col-lg-3 col-md-3 col-sm-6 ">
                 <div class="text-center">
                     <div class="member-thumb">
-                        <img src="~/Content/images/member4.jpg" class="img-responsive" alt="member 4" />
+                        <img src="~/Content/images/member4.jpeg" class="img-responsive" alt="member 4" height="500px" />
                         <div class="thumb-overlay">
                             <a href="#"><span class="social-icon-fb"></span></a>
                             <a href="#"><span class="social-icon-twitter"></span></a>

@@ -1,0 +1,139 @@
+﻿@using Test_MVC.Models
+@{
+    List<Quiz> listOfQuiz = (List<Quiz>)Session["resultList"];
+    double result = (double)Session["result"];
+    String[] sQuiz = (String[])Session["userAns"];
+<div id="content_wrapper" class="content single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar-page rmm taxlist graphite">
+
+                    <span class="sidebar-title" style="display: block;">Quiz</span>
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">Total Questions: @listOfQuiz.Count()</li>
+                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">Total Marks: @listOfQuiz.Count();</li>
+                    </ul>
+                    <span class="sidebar-title" style="display: block; color:red">Result: @result %</span>
+                </div>
+
+            </div>
+
+            <div class="col-md-7">
+                <div id="">
+
+
+                    @*<div>
+                            <br />
+                            <ul style="list-style:none; ">
+                                <li> <b>Course: &nbsp;</b>SubjectName</li>
+                                <li> <b>Instructor: &nbsp;</b>TeacherName</li>
+                            </ul>
+                        </div>*@
+                    @{
+
+
+                        int questId = 1;
+
+                        <div class="panel panel-success" style="">
+
+                            <div class="panel-heading">
+                                <span style=""><b>Quiz</b></span>
+                            </div>
+
+                            <div class="panel-body" style="padding:0px">
+                                @{
+                              int i=0;
+                                   }
+                                    @foreach (var query in listOfQuiz)
+                                    {
+                                        <div class="panel panel-warning" style="" id="">
+                                            <div class="panel-body">
+                                                <div class="col-lg-12">
+                                                    <p style="text-align:left"><b>Question: @questId</b></p>
+                                                    <p style="text-align:left"><b>@query.Statement</b></p>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div style="padding-right:0%">
+                                                            A):
+                                                            
+                                                        </div>
+                                                        @if(sQuiz[i]==query.Option_A)
+                                                        {
+                                                             <div style=" text-align: left; padding-left:10%"><p style="color:green">@query.Option_A</p></div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style=" text-align: left; padding-left:10%">@query.Option_A</div>
+                                                        }
+                                                        <br />
+                                                        <div style="padding-right:0%">
+                                                            B):
+                                                        </div>
+                                                        @if (sQuiz[i] == query.Option_B)
+                                                        {
+                                                            <div style=" text-align: left; padding-left:10%"><p style="color:green">@query.Option_B</p></div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style=" text-align: left; padding-left:10%">@query.Option_B</div>
+                                                        }
+                                                        <div style="padding-right:0%">
+                                                            C):
+                                                        </div>
+                                                        @if (sQuiz[i] == query.Option_C)
+                                                        {
+                                                            <div style=" text-align: left; padding-left:10%"><p style="color:green">@query.Option_C</p></div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style=" text-align: left; padding-left:10%">@query.Option_C</div>
+                                                        }
+                                                         <br />
+                                                        <div style="padding-right:0%">
+                                                            D):
+                                                        </div>
+                                                        @if (sQuiz[i] == query.Option_D)
+                                                        {
+                                                            <div style=" text-align: left; padding-left:10%"><p style="color:green">@query.Option_D</p></div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style=" text-align: left; padding-left:10%">@query.Option_D</div>
+                                                        }
+                                                        <br />
+                                                     
+                                                        <div style="padding-right:0%">
+                                                            (Correct):
+                                                        </div>
+                                                        <div style=" text-align: left; padding-left:10%;" ><p style="color:red">@query.Correct</p></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        questId = questId + 1;
+                                        i = i + 1;
+
+                                    }
+
+                                  
+
+
+                                
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+            <!--            <div class="col-md-3 col-sm-4">-->
+            <!--            </div> -->
+
+        </div>
+    </div>
+</div>
+}

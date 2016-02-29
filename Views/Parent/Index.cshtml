@@ -1,49 +1,140 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@model Test_MVC.Models.UserProfile
+@using Test_MVC.Models
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3 float-left">
                 <div class="sidebar-page rmm taxlist graphite">
 
                     <span class="sidebar-title" style="display: block;">Children</span>
+                    @{
+                        db ctx = new db();
+                        List<UserProfile> list= new List<UserProfile>();
+                        try
+                        {
+                            list = ctx.Parent.Where(x => x.ParentId == Model.UserId).Select(x => x.UserProfile).ToList();
+                        }
+                        catch (Exception e) { }
+                    
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../Class/Subject">Fahad</a></li>
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../Class/Subject">Manzoor</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="../Class/Subject">Iqbal</a></li>
-                        
-
+                        @if(list!=null)
+                        { 
+                            foreach(var v in list)
+                            { 
+                            <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="../../Parent/Result/@v.UserId">@v.UserName</a></li>
+                      
+                      
+                            }
+                        }
                     </ul>
+                    }
                 </div>
 
             </div>
-            <div class="col-md-2 pull-right" style="margin-top:4%">
-                <div class=" panel panel-success ">
+            <div class="col-md-8" style="margin-top:4%">
+                <div class=" panel panel-success " style="margin-left:2%; margin-right:2%">
                     <div class="panel-heading">
-                        New Events
+
+                        Class Members :4
                     </div>
                     <div class="panel-body">
+
                         <div>
-                            <a href="~/Quiz/SelectedQuiz">A new Quiz has been posted in this class see here...</a>
+
+                            <label>Add New:</label>
+                            <div id="user">
+                                <input type="text" placeholder="Enter email" style="width:80%; " id="member" name="memeber" />
+                            </div>
 
                         </div>
-                        <hr />
-                        <div>
-                            <a href="~/Class/Topic">A new lecture has been posted in this class see here...</a>
-
+                        <div id="submitdiv">
                         </div>
+
+                        <div id="subjectS"></div>
+
                     </div>
+                    @Scripts.Render("~/bundles/jquery")
+                    <script>
 
 
+
+                        $(document).ready(function () {
+
+                            $("#from").hide();
+                            $("#own").hide();
+                            $('#member').change(function () {
+                                alert($('#member').val() + "   " + $('#STCID').val());
+
+                                $.post("/Parent/getChildren", { Name: $('#member').val() }, function (data) {
+
+                                    $('#subjectS').empty().append(data.StudentName);
+                                    alert(data.StudentName);
+                                });
+
+                            });
+                            $("#NoId").click(function clickForQuiz() {
+                                //$("#QuizClick").show();
+                                $("#from").show();
+                                $("#own").show();
+                            });
+
+                        });
+                    </script>
+
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+                            <h3 class="box-title">Bar Chart</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="bar-chart" style="height: 300px;"></div>
+                        </div><!-- /.box-body-->
+                    </div><!-- /.box -->
+                    <!-- /.row -->
 
                 </div>
             </div>
 
-     
-            <!-- /.row -->
-
-
+          
         </div>
     </div>
 
 
 
 </div>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        var bar_data = {
+            data: [["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9]],
+            color: "#3c8dbc"
+        };
+        $.plot("#bar-chart", [bar_data], {
+            grid: {
+                borderWidth: 1,
+                borderColor: "#f3f3f3",
+                tickColor: "#f3f3f3"
+            },
+            series: {
+                bars: {
+                    show: true,
+                    barWidth: 0.5,
+                    align: "center"
+                }
+            },
+            xaxis: {
+                mode: "categories",
+                tickLength: 0
+            }
+        });
+    });
+</script>

@@ -1,0 +1,61 @@
+﻿@model Test_MVC.Models.SubjectClass
+@using Test_MVC.Models
+@{
+    db ctx = new db();
+    int id = (Int32)Session["ChildId"];
+    List<StudentTeacherClass> nextId = ctx.STCStudents.Where(x => x.Student_Id == id).Select(x => x.StudentTeacherClass).ToList();
+    
+}
+<div id="content_wrapper" class="content single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 float-left">
+                <div class="sidebar-page rmm taxlist graphite">
+
+                    <span class="sidebar-title" style="display: block;">Result Of:</span>
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                        @foreach (var v in nextId)
+                        {
+                            <li id="menu-item-30013"  class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">
+                                @v.SubjectClass.Class.Name By @v.UserProfile.UserName
+                                <br />
+                                <a onclick="myFunction(@v.StudentTeacherClassId, @id)">@v.SubjectClass.Subject.Name</a>
+                            </li>
+                        }
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            
+                    @Scripts.Render("~/bundles/jquery")
+                    <script>
+                        $(document).ready(function () {
+
+                            $("#individualResult").empty().load("/Parent/IndividualResult?id=" + 1 + "&STDID=" + 1);
+                            alert("The Data has been Loaded.")
+                        });
+                      
+                        function myFunction(STCid,id) {
+                            alert("This user s" + id);
+
+                            $("#individualResult").empty().load("/Parent/IndividualResult?id=" + id + "&STDID=" + STCid);
+                            alert("The Data has been Loaded.")
+
+                            //    document.getElementById("uName").innerText(id);
+
+                        }
+
+                    </script>
+            <div id="individualResult">
+                </div>
+
+        </div>
+    </div>
+
+
+
+</div>

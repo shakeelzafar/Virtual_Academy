@@ -1,27 +1,37 @@
-﻿<div id="content_wrapper" class="content single">
+﻿@model Test_MVC.Models.SubjectClass
+@using Test_MVC.Models
+@{
+    List<Class> listOfClass=new db().Class.ToList();
+    List<SubjectClass> list = new db().SubjectClass.ToList();
+    
+    int subClassId=0;
+
+<div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <div class="sidebar-page rmm taxlist graphite">
 
-                    <span class="sidebar-title" style="display: block;">Features</span>
+                    <span class="sidebar-title" style="display: block;">Classes</span>
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
                         
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="http://www.formget.com/features/brandings/">Custom Brandings</a></li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Menu 1
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Submenu 1-1</a></li>
-                                <li><a href="#">Submenu 1-2</a></li>
-                                <li><a href="#">Submenu 1-3</a></li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="http://www.formget.com/features/conditional-logic/">Conditional Logic</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="http://www.formget.com/features/conditional-logic/">Conditional Logic</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="http://www.formget.com/features/conditional-logic/">Conditional Logic</a></li>
+                        @foreach(var v in listOfClass)
+                        { 
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    @v.Name
+                                    <span class="caret"></span>
+                                </a>
+                                @foreach(var obj in v.SubjectClass.Where(x=>x.Class_Id==v.ClassId).Select(x=>x.Subject))
+                                {
+                                    subClassId = new db().SubjectClass.First(x => x.Subject_Id == obj.SubjectId && x.Class_Id == v.ClassId).SubClassId;
+                                <ul class="dropdown-menu">
+                                    <li onclick="myFunction(@subClassId)"><a href="~/Quiz/Index#@subClassId">@obj.Name</a></li>
+                                   
+                                </ul>
+                                }
+                            </li>
+                        }
                         
                     </ul>
                 </div>
@@ -29,137 +39,100 @@
             </div>
 
             <div class="col-md-7">
-                <div id="">
+                @{
+                    List<SubjectClass> subList = new db().SubjectClass.ToList();
+                    
+                }
 
-
+                <div id="individual">
                     <div>
-                        <br />
-                        <ul style="list-style:none; ">
-                            <li> <b>Course: &nbsp;</b>SubjectName</li>
-                            <li> <b>Instructor: &nbsp;</b>TeacherName</li>
-                        </ul>
+                        @Model.Class.Name --> @Model.Subject.Name
                     </div>
+                    <form action="~/Quiz/AttemptQuiz/@Model.SubClassId" class="form-horizontal" method="post" role="form">
+                        <div class="panel panel-success" style="">
 
-                    <div class="panel panel-success" style="">
+                            <div class="panel-heading">
+                                <span style=""><b>Capters</b></span>
+                            </div>
+                            <div class="panel-body">
+                                @foreach (var v in Model.Chapter)
+                                {
+                                    <hr />
+                                    <input type="checkbox" value="@v.Name" style="margin-right:5%" name="chapter" /> @v.Name<br />
+                                }
 
-                        <div class="panel-heading">
-                            <span style=""><b>Session</b></span>
+                            </div>
+
+
                         </div>
 
-                        <div class="panel-body" style="padding:0px">
+                        <div>
 
-                            <form action="../Students/StudentSubmitQuiz" class="form-horizontal" role="form">
-
-                                <div class="panel panel-warning" style="">
-                                    <div class="panel-body">
-                                        <div class="col-lg-12">
-                                            <p style="text-align:left"><b>Question: 1</b></p>
-                                            <p style="text-align:left"><b>this is first question and we are testing either it is responsive or not, if it is responcive then this is well n good other wise we will chnage it.</b></p>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionA" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionB" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionC" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionD" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-warning" style="">
-                                    <div class="panel-body">
-                                        <div class="col-lg-12">
-                                            <p style="text-align:left"><b>Question: 1</b></p>
-                                            <p style="text-align:left"><b>this is first question and we are testing either it is responsive or not, if it is responcive then this is well n good other wise we will chnage it.</b></p>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionA" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionB" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionC" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                                <div style="padding-right:0%">
-                                                    <input type="radio" name="option" value="optionD" required style="float:left; " />
-                                                </div>
-                                                <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas tionaakdjk kkas tiona</div>
-                                                <br />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="panel panel-warning" style="">
-                                        <div class="panel-body">
-                                            <div class="col-lg-12">
-                                                <p style="text-align:left"><b>Question: 1</b></p>
-                                                <p style="text-align:left"><b>this is first question and we are testing either it is responsive or not, if it is responcive then this is well n good other wise we will chnage it.</b></p>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div style="padding-right:0%">
-                                                        <input type="radio" name="option" value="optionA" required style="float:left; " />
-                                                    </div>
-                                                    <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas tiona</div>
-                                                    <br />
-
-                                                    <div style="padding-right:0%">
-                                                        <input type="radio" name="option" value="optionB" required style="float:left; " />
-                                                    </div>
-                                                    <div style=" text-align: left; padding-left:10%"> tiona</div>
-                                                    <br />
-                                                    <div style="padding-right:0%">
-                                                        <input type="radio" name="option" value="optionC" required style="float:left; " />
-                                                    </div>
-                                                    <div style=" text-align: left; padding-left:10%">op ajdkb ajbkas dkjsdkh akdjk kkas dkjsdkh akdjk kkas </div>
-                                                    <br />
-                                                    <div style="padding-right:0%">
-                                                        <input type="radio" name="option" value="optionD" required style="float:left; " />
-                                                    </div>
-                                                    <div style=" text-align: left; padding-left:10%">op ajdkb  kkas tionaakdjk kkas tiona</div>
-                                                    <br />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:; margin-top:5px; margin-bottom:5px" />
-                                </div>
-
-                            </form>
+                            <input type="submit" id="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:; margin-top:5px; margin-bottom:5px" />
                         </div>
-                    </div>
-
+                    </form>
 
                 </div>
+
+                <div id="private">
+                        @foreach(var obj in subList)
+                        { 
+                        <div id="@obj.SubClassId">
+                            <div>
+                                @obj.Class.Name --> @obj.Subject.Name
+                            </div>
+                            <form action="~/Quiz/AttemptQuiz/@Model.SubClassId" class="form-horizontal" method="post" role="form">
+                                <div class="panel panel-success" style="">
+
+                                    <div class="panel-heading">
+                                        <span style=""><b>Capters</b></span>
+                                    </div>
+                                    <div class="panel-body">
+                                        @foreach (var v in obj.Chapter)
+                                        {
+                                            <hr />
+                                            <input type="checkbox" value="@v.Name" style="margin-right:5%" name="chapter" /> @v.Name<br />
+                                        }
+
+                                    </div>
+
+
+                                </div>
+                      
+                                <div>
+
+                                    <input type="submit" id="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:; margin-top:5px; margin-bottom:5px" />
+                                </div>
+                            </form>
+
+                        </div>
+                        }
+                  </div>
             </div>
+            @Scripts.Render("~/bundles/jquery")
+            <script>
+
+                function myFunction(id)
+                {
+                    alert("My function trigered with id = " + id);
+                    $("#private").show();
+                    $("#" + id).show();
+                    try{
+                        for (var v = 1; v < 100; v++)                       
+                            if(id!=v)
+                                $("#" + v).hide();                       
+                           
+                    }catch(e)
+                    { alert("There is an exception");}
+
+                    $("#individual").hide();
+                }
+                $(document).ready(function () {
+
+                    $("#private").hide(); 
+
+                });
+            </script>
 
             <!--            <div class="col-md-3 col-sm-4">-->
             <!--            </div> -->
@@ -167,3 +140,5 @@
         </div>
     </div>
 </div>
+    
+    }
