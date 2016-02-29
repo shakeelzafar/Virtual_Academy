@@ -14,7 +14,10 @@
                         {
                             list = ctx.Parent.Where(x => x.ParentId == Model.UserId).Select(x => x.UserProfile).ToList();
                         }
-                        catch (Exception e) { }
+                        catch (Exception e) {
+                            
+                            <h5>@e</h5>
+                        }
                     
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
                         @if(list!=null)
