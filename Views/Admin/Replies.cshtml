@@ -1,0 +1,35 @@
+﻿@using Test_MVC.Models;
+@{
+    Layout = "../Shared/_Admin.cshtml";
+    int id = ViewBag.ID;
+    db ctx = new db();
+    Comment com = ctx.Comment.First(x => x.CommentId == id);
+
+}
+
+
+<section class="content">
+    <div class="content-header">
+
+        <div class="">
+
+            <div style="margin-left:">
+                <p><img src="../../Content/images/" width=" 40px" height="40px" /> <a style="margin-right:3%">@com.UserProfile.UserName</a>@com.Comment1</p>
+            </div>
+            <hr />
+            <a style="font-size:9px">All Replies</a>
+            <div style="background-color: orange; margin-left: 7%; margin-right:3%" class="row">
+            @foreach(var v in com.Reply)
+            {
+                    <div style="background-color:yellow; width:70%; float:left" >
+                        <img src="../../Content/images/" width="40" height="40" /> <a style="margin-right:3%">@v.UserProfile.UserName</a>sbdkabsfjbk kjasbfkj ajekbssbdkabsfjbk kjasbfkj ajekbssbdkabsfjbk kjasbfkj ajekbssbdkabsfjbk kjasbfkj ajekbs
+                    </div>
+                    <div style="background-color:pink; width:10%; float:left">
+                        <input type="button" value="delete" class="btn btn-danger fa fa-remove">
+                    </div>
+            }
+            </div>
+
+        </div>
+    </div>
+</section>

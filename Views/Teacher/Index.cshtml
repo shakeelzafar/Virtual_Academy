@@ -1,6 +1,6 @@
 ﻿@model Test_MVC.Models.UserProfile
 @using Test_MVC.Models
-
+<div id="shaki">
 <div id="content_wrapper" class="content single">
     <div class="container">
         <div class="row">
@@ -165,14 +165,15 @@
                             $.post("/Teacher/SubmitReply", { id: value, Name: $('#Reply' + value).val() }, function (data) {
 
                                 $('#' + value).append(data.result);
-                                alert(data.result);
-                                $("#pId").hide();
-                                var data ="<div class="+"\""+"col-lg-12"+"\""+">";
-                                data+= " <p id=" + "\"" + "pId" + "\"" + ">   <img src=" + "\"" + "../../Content/images/ width=" + "\"" + " 40px" + "\"" + " height=" + "\"" + "40px" + "\"" + " style=" + "\"" + "margin-right:3%" + "\"" + " />";
+                               
+                                $("#shaki").load('/Teacher/shak?id=4')
+                                var data = "<div class=" + "\"" + "col-lg-12" + "\"" + ">";
+                                data += " <p id=" + "\"" + "pId" + "\"" + ">   <img src=" + "\"" + "../../Content/images/ width=" + "\"" + " 40px" + "\"" + " height=" + "\"" + "40px" + "\"" + " style=" + "\"" + "margin-right:3%" + "\"" + " />";
                                 data += "<input type=" + "\"" + "text" + "\"" + " name=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "Reply" + value + "\"" + " placeholder=" + "\"" + "Answer this Question..." + "\"" + " />";
                                 data += "<input type=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "ReplyofComment(" + value + ")" + "\"" + " value=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "submitReply" + "\"" + "  /></p>";
-                                data+="</div>";
+                                data += "</div>";
                                 $("#" + value).append(data);
+                                $("#submitReply").show();
                                 //  $("#"+value).show();
                             });
                         }
@@ -183,13 +184,13 @@
                             data += "<input type=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "ReplyofComment(" + id + ")" + "\"" + " value=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "submitReply" + "\"" + "  /></p>";
                             data+="</div>";
                             $("#" + id).append(data);
+                            $("#submitReply").show();
                         }
 
                         $(document).ready(function () {
                             //$("#ansdiv").hide();d ddddddd
                             // $("#commId").hide();
                             $('#Reply').change(function () {
-                                alert($('#Reply').val());
                                 $("#submitReply").show();
                             });
 
@@ -226,3 +227,4 @@
 
         </div>
     </div>
+</div>

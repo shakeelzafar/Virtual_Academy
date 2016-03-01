@@ -1,0 +1,235 @@
+﻿@{
+    Layout = null;
+}
+@model Test_MVC.Models.UserProfile
+@using Test_MVC.Models
+<div id="shaki">
+    <div id="content_wrapper" class="content single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sidebar-page rmm taxlist graphite">
+
+                        <span class="sidebar-title" style="display: block;">Classes</span>
+
+
+
+                        <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                            @foreach (var v in Model.StudentTeacherClass.Where(x => x.Teacher_Id == Model.UserId).Select(x => x.SubjectClass))
+                            {
+                                <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">
+
+                                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                                        @v.Class.Name
+
+
+                                        @foreach (var obj in v.Subject.SubjectClass.Select(x => x.Subject))
+                                        {
+                                            <li><a href="~/Teacher/Class/@v.SubClassId">@obj.Name</a></li>
+
+                                        }
+
+
+
+                                    </ul>
+                                </li>
+                            }
+
+
+                        </ul>
+                        <hr />
+                        <span class="sidebar-title" style="display: block;">Other Actions</span>
+                        <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                            <li style="margin-left:3%" id="clickForClass" onclick="ClassClick()" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013">
+                                Add Class
+                            </li>
+                            <li id="formOfClass">
+
+                                <form action="../../Teacher/AddSTC" method="post" role="form" class="form-horizontal">
+                                    @{
+                                        List<SubjectClass> list = new db().SubjectClass.ToList();
+                                        List<Class> ClassList = new List<Class>();
+                                        bool check = true;
+                                        List<SubjectClass> listofTeacherClass = Model.StudentTeacherClass.Select(x => x.SubjectClass).ToList();
+                                        foreach (var v in list)
+                                        {
+                                            foreach (var obj in listofTeacherClass)
+                                            {
+                                                if (obj.SubClassId == v.SubClassId)
+                                                {
+                                                    check = false;
+                                                    break;
+                                                }
+                                            }
+                                            if (check)
+                                            {
+                                                ClassList.Add(v.Class);
+                                            }
+                                            check = true;
+                                        }
+                                        int count = 0;
+
+                                        <select id="ClassSelector" name="Class">
+                                            @foreach (var value in ClassList)
+                                            {
+                                                <option>@value.Name</option>
+
+                                                if (count == ClassList.Count - 1)
+                                                {
+                                                    break;
+                                                }
+                                                count++;
+                                            }
+                                        </select>
+
+                                    }
+
+                                    <div id="subjectS">
+                                        <select>
+                                            <option>--Select--</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <input type="submit" value="Add">
+                                    </div>
+                                </form>
+                            </li>
+
+
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-7">
+                    <div class="panel panel-primary">
+
+                        <form action="../../Teacher/Add_ClassComment/@Model.StudentTeacherClass.First(x=>x.Teacher_Id==Model.UserId).StudentTeacherClassId" method="post">
+                            <div class="panel-body " style="background-color:#ccc">
+                                <img src="../../Content/images/icon.png" style="float:left; margin-right:0%" width="8%" height="8%" />
+
+                                <textarea style="width:90%; height:90%" class="pull-right" name="Comment" placeholder="Ask a Question..."></textarea>
+                            </div>
+                            <input type="submit" value="Comment" class="btn btn-circle">
+                        </form>
+                    </div>
+                    @{
+                        try
+                        {
+                            List<Comment> listofComment = new List<Comment>();
+                            List<StudentTeacherClass> listOfSTC = new db().StudentTeacherClass.Where(x => x.Teacher_Id == Model.UserId).ToList();
+
+                            foreach (var v in listOfSTC)
+                            {
+                                foreach (var obj in v.Comment)
+                                {
+                                    listofComment.Add(obj);
+                                }
+                            }
+
+
+
+
+                            foreach (var v in listofComment)
+                            {
+                                <div class="">
+
+                                    <div style="margin-left:">
+                                        <p><img src="../../Content/images/ width=" 40px" height="40px" /> <a style="margin-right:3%">@v.UserProfile.UserName</a>@v.Comment1</p>
+                                    </div>
+                                    <hr />
+                                    <a style="font-size:9px">All Replies</a>
+                                    <a style="font-size:9px" id="answer" onclick="answer(@v.CommentId)"> &nbsp;&nbsp;&nbsp;&nbsp; Answer this Question</a>
+
+                                    <hr />
+
+
+                                    @Scripts.Render("~/bundles/jquery")
+                                    <script>
+                                        function ClassClick() {
+                                            $("#formOfClass").show();
+                                        }
+
+                                        $(document).ready(function () {
+
+                                            $("#formOfClass").hide();
+                                            $('#ClassSelector').change(function () {
+
+                                                $.post("/Teacher/getSubjectName", { Name: $('#ClassSelector').val() }, function (data) {
+
+                                                    $('#subjectS').empty().append(data.SubjectName)
+                                                });
+                                            });
+
+                                        });
+                                        function ReplyofComment(value) {
+                                            $.post("/Teacher/SubmitReply", { id: value, Name: $('#Reply' + value).val() }, function (data) {
+
+                                                $('#' + value).append(data.result);
+                                                alert(data.result);
+
+
+                                                $("#shaki").load('/Teacher/shak?id=4')
+                                                var data = "<div class=" + "\"" + "col-lg-12" + "\"" + ">";
+                                                data += " <p id=" + "\"" + "pId" + "\"" + ">   <img src=" + "\"" + "../../Content/images/ width=" + "\"" + " 40px" + "\"" + " height=" + "\"" + "40px" + "\"" + " style=" + "\"" + "margin-right:3%" + "\"" + " />";
+                                                data += "<input type=" + "\"" + "text" + "\"" + " name=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "Reply" + value + "\"" + " placeholder=" + "\"" + "Answer this Question..." + "\"" + " />";
+                                                data += "<input type=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "ReplyofComment(" + value + ")" + "\"" + " value=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "submitReply" + "\"" + "  /></p>";
+                                                data += "</div>";
+                                                $("#" + value).append(data);
+                                                $("#submitReply").show();
+                                                //  $("#"+value).show();
+                                            });
+                                        }
+                                        function answer(id) {
+                                            var data ="<div class="+"\""+"col-lg-12"+"\""+">";
+                                            data += " <p id=" + "\"" + "pId" + "\"" + ">   <img src=" + "\"" + "../../Content/images/ width=" + "\"" + " 40px" + "\"" + " height=" + "\"" + "40px" + "\"" + " style=" + "\"" + "margin-right:3%" + "\"" + " />";
+                                            data += "<input type=" + "\"" + "text" + "\"" + " name=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "Reply" + id + "\"" + " placeholder=" + "\"" + "Answer this Question..." + "\"" + " />";
+                                            data += "<input type=" + "\"" + "submit" + "\"" + " onclick=" + "\"" + "ReplyofComment(" + id + ")" + "\"" + " value=" + "\"" + "Reply" + "\"" + " id=" + "\"" + "submitReply" + "\"" + "  /></p>";
+                                            data+="</div>";
+                                            $("#" + id).append(data);
+                                            $("#submitReply").show();
+                                        }
+
+                                        $(document).ready(function () {
+                                            //$("#ansdiv").hide();d ddddddd
+                                            // $("#commId").hide();
+                                            $('#Reply').change(function () {
+                                                alert($('#Reply').val());
+                                                $("#submitReply").show();
+                                            });
+
+
+                                        });
+                                    </script>
+                                    <div style="margin-left:8%" id="@v.CommentId" class="col-lg-12">
+                                        @foreach (var obj in v.Reply)
+                                        {
+                                            <div style="margin-left:0%">
+                                                <p><img src="../../Content/images/ width=" 40px" height="40px" /> <a style="margin-right:3%">@obj.UserProfile.UserName</a>@obj.Reply1</p>
+                                            </div>
+                                            <hr />
+                                        }
+
+
+                                    </div>
+                                </div>
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            <h3>No Comment</h3>
+                        }
+                    }
+                </div>
+
+
+
+            </div>
+            <!--            <div class="col-md-3 col-sm-4">-->
+            <!--            </div> -->
+
+        </div>
+    </div>
+</div>

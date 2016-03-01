@@ -30,19 +30,13 @@
          folder instead of downloading all of them to reduce the load. -->
     <link href="../../dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- links -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="../../Navbar/bootstrap.min.css">
-    <script src="../../Navbar/jquery.min.js"></script>
-    <script src="../../Navbar/bootstrap.min.js"></script>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<link rel="shortcut icon" href="PUT YOUR FAVICON HERE">-->
     <!-- Google Web Font Embed -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 
     <!-- Bootstrap core CSS -->
-    <link href="~/Content/css/bootstrap.css" rel='stylesheet' type='text/css'>
+     <link href="~/Content/css/bootstrap.css" rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
     <link href="~/Content/js/colorbox/colorbox.css" rel='stylesheet' type='text/css'>
@@ -151,7 +145,7 @@
         heap.load("3155530423");
     </script>
 </head>
-<body class="single single-features postid-12137">
+<body class="single single-features postid-12137" style="">
     <div id="main">
         <style type="text/css">
             #middle_header_container ul li, #middle_header_container .header-menus ul li {
@@ -172,7 +166,7 @@
                             <ul>
                                 <li>
                                     <a href="~/Home">
-                                        <img src="~/Content/images/icon.png" width="40px" height="30px" alt="Formget logo">Virtual Academy
+                                        <img src="~/Content/images/icon.png" width="40px" height="30px" alt="Formget logo"><span style="">Virtual Academy</span>
                                     </a>
                                 </li>
                                 
@@ -260,10 +254,11 @@
 
                             else
                             {
-                               <li>
+                               <li style="margin-bottom:13px">
                                 <a href="~/User/Register">Register</a></li>
-                                <li>
-                                <a href="~/User/Login">Login</a></li>
+    <li style="margin-bottom:13px">
+        <a href="~/User/Login">Login</a>
+    </li>
                             }
                            
 
@@ -281,40 +276,21 @@
                             <menu id="menu" style="display: block;">
                                 <div class="menu-form-builder-container">
                                     <ul id="menu-form-builder" class="main-header-menu">
-                                        <li><a href="~/Home/Index">HOME</a></li>
-                                        <li><a href="~/Class">CLASS</a></li>
-                                        <li><a href="~/Quiz">Quiz</a></li>
-                                        <li><a href="~/Home/Index#templatemo-about">ABOUT</a></li>
-                                        <li><a href="~/Home/Index#templatemo-contact">CONTACT</a></li>
+                                        <li style="text-align:center; padding: 5px; margin-bottom: 15px; width:80px; height: 30px; display: block; background-color: seagreen; float: left"><a href="~/Home/Index"><span style="color:white">HOME</span></a></li>
+                                        <li style="text-align: center; padding: 5px; width: 80px; height: 30px; display: block; background-color: seagreen; float: left; "><a href="~/Class"><span style="color:white">CLASS</span></a></li>
+                                        <li style="text-align: center; padding: 5px; width: 80px; height: 30px; display: block; background-color: seagreen; float: left; "><a href="~/Quiz"><span style="color:white">Quiz</span></a></li>
+                                        <li style ="text-align: center; padding: 5px; width: 80px; height: 30px; display: block; background-color: seagreen; float: left; "><a href="~/Home/Index#templatemo-about"><span style="color:white">ABOUT</span></a></listyle>
+                                        <li style="text-align: center; padding: 5px; width: 80px; height: 30px; display: block; background-color: seagreen; float: left; "><a href="~/Home/Index#templatemo-contact"><span style="color:white">CONTACT</span></a></li>
 
                                         <li class="float-right pull-right" style="margin-right:0%; ">
-                                               
-                                                <input type="text" name="Search" id="Search" placeholder="Search" style="color:black;" class="glyphicon-search col-lg-12">
-                                             
+
+                                            <input type="text" name="Search" id="Search" placeholder="Search" style="color:black;" class="glyphicon-search col-lg-12">
+
                                         </li>
 
                                     </ul>
                                 </div>
-                                @Scripts.Render("~/bundles/jquery")
-                                <script>
-                                    function myFunction()
-                                    {
-                                        alert($('#Search').val());
-                                        $('#AllinOne').load("../../Class/Search?Search=" + $('#Search').val());
-                                    }
-                                  
-                                    $(document).ready(function () {
-
-
-                                        $('#Search').change(function () {
-                                            alert($('#Search').val());
-                                            $('#AllinOne').load("../../Class/Search?Search=" + $('#Search').val());
-                                            
-                                        });
-                                       
-
-                                    });
-                                </script>
+                               
 
                             </menu>
                         </div>
@@ -323,6 +299,28 @@
                 </div>
             </div>
         </div>
+        
+        @Scripts.Render("~/bundles/jquery")
+            
+        <script>
+            function myFunction() {
+                alert($('#Search').val());
+                $('#AllinOne').load("../../Class/Search?Search=" + $('#Search').val());
+            }
+
+            $(document).ready(function () {
+
+
+                $('#Search').change(function () {
+                    alert($('#Search').val());
+                    $('#AllinOne').load("../../Class/Search?Search=" + $('#Search').val());
+
+                });
+
+
+            });
+        </script>
+
         <!--Header-->
         <header id="header">
             <span class="clear"></span><!--Sub Header-->
@@ -343,7 +341,7 @@
         <!--Content Wrapper-->
         <div id="templatemo-top">
         </div>
-        <div id="AllinOne">
+        <div id="AllinOne" >
         @RenderBody()
 
         @Scripts.Render("~/bundles/jquery")

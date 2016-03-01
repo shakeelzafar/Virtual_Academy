@@ -5,64 +5,54 @@
             <div class="col-md-3">
                 <div class="sidebar-page rmm taxlist graphite">
 
-                    <span class="sidebar-title" style="display: block;">Classes</span>
+                    <span class="sidebar-title" style="display: block; background-color: #337ab7; ">Classes</span>
                     <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
                         
                             @foreach(var v in new db().Class.ToList())
                             { 
-                        
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="~/Class/Index#@v.Name">@v.Name</a></li>
-                        }
-                        
-
-
+                                <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="~/Class/Index#@v.Name">@v.Name</a></li>
+                            }
                     </ul>
                 </div>
-
             </div>
 
             <div class="col-md-8" style="padding:0%">
-                
-
-                        @foreach(var v in new db().Class.ToList())
-                            {
-                            
-                <div class=" panel panel-body" id="@v.Name">
-                    <div>
-                        <br />
-                        <a href="../../Class/Of/@v.ClassId"><h3>@v.Name</h3></a>
-                        <div class="">
-                            <div class=" panel panel-primary ">
-                                <div class="panel-heading">
-                                    Total Subjects: @v.SubjectClass.Count()
-                                   
-                                </div>
-                                <div class="panel-body">
-                                    <div>
-                                        @{int chap=1;
-                                        foreach(var sub in v.SubjectClass)
-                                        { 
-                                        <div class="col-md-5">
-                                            @chap . @sub.Subject.Name <hr/>
-
-                                        </div>
-                                        }}
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <!-- /.col-lg-4 -->
-                        </div>
-
-
+                @foreach (var v in new db().Class.ToList())
+                {
+                    <div class="panel panel-body" id="@v.Name">
                         <div>
-                            <a href="../../Class/Of/@v.ClassId"><button class="btn-progres col-lg-2 btn-success" style="margin-left:38%">Take Class</button></a>
-                        </div>
-                    </div>
+                            <a href="../../Class/Of/@v.ClassId"><h3>@v.Name</h3></a>
+                                <div class="">
+                                <div class=" panel panel-primary ">
+                                <div class="panel-heading">
+                                Total Subjects: @v.SubjectClass.Count()
+                            </div>
+                    <div class="panel-body">
+                        <div>
+                            @{int chap = 1;
+                            foreach (var sub in v.SubjectClass)
+                            {
+                                <div class="col-md-5">
+                                    <a href="../../Class/Of/@v.ClassId">@chap . @sub.Subject.Name</a>
 
+                                </div>
+                            }}
+                        </div>
+
+                    </div>
                 </div>
-                        }
+
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+            <div>
+                <a href="../../Class/Of/@v.ClassId"><button class="btn-progres col-lg-2 btn-success" style="margin-left:38%">Take Class</button></a>
+            </div>
+        </div>
+
+    </div>
+}
 
             </div>
         </div>
