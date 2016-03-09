@@ -1,8 +1,7 @@
 ﻿@model Test_MVC.Models.Subject
 @using Test_MVC.Models
-<div id="content_wrapper" class="content single">
-    <div class="container">
-        <div class="row">
+<div class="content container">
+    
             <div id="wrapper" class="row">
 
 
@@ -20,20 +19,20 @@
                 <!-- /.row -->
 
                 <div style="margin-top:5%; " class="col-lg-6 pull-right">
-                    
-                     @{ SubjectClass sub = new db().SubjectClass.First(x=>x.Subject_Id==Model.SubjectId);
-                            foreach(var v in sub.Chapter)
-                            { 
+
+                    @{ SubjectClass sub = new db().SubjectClass.First(x => x.Subject_Id == Model.SubjectId);
+                     foreach (var v in sub.Chapter)
+                     {
                         <div style="float:left; padding-left:5% ; margin-left:5%; ">
                             <hr />
-                            
+
                             <a href="../../Class/Chapter/@v.ChapterId"> <h3>@v.Name</h3></a>
                             <p> We will now equate two algebraic expressions and think about how it might constrain what value the variables can take on.  The algebraic manipulation you learn here really is the heart of algebra.</p>
                         </div>
                      }
-                    
-                     }
-                        
+
+                    }
+
                 </div>
 
 
@@ -43,6 +42,5 @@
             <!--            <div class="col-md-3 col-sm-4">-->
             <!--            </div> -->
 
-        </div>
-    </div>
+        
 </div>

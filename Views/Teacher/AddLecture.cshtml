@@ -1,24 +1,7 @@
 ﻿@using Test_MVC.Models
-<div id="content_wrapper" class="content single">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="sidebar-page rmm taxlist graphite">
-
-                    @*<span class="sidebar-title" style="display: block;">Features</span>
-                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
-                        <li id="menu-item-30013" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30013"><a href="http://www.formget.com/features/brandings/">Add Class</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="~/Teacher/AddLecture">Add Lecture</a></li>
-                        <li id="menu-item-30018" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30018"><a href="http://www.formget.com/features/conditional-logic/">Add Quiz</a></li>
-
-                    </ul>
-                    <hr />
-                    <span class="sidebar-title" style="display: block;">Class Attributes</span>*@
-
-                </div>
-
-            </div>
-
+@{
+    Layout = null;
+} 
             @{
                 int teacherId = (int)Session["Id"];
                 db ctx = new db();
@@ -29,20 +12,20 @@
                     clas.Add(stc.SubjectClass.Class);
                 }
             }
-            <div class="col-md-7">
-                <form action="~/Teacher/Add_Lecture" class="form-horizontal" role="form" style="border:double;" method="post">
+            <div class="col-md-7" style="margin-top:5%;  margin-bottom:5%" >
+                <form action="~/Teacher/Add_Lecture" class="form-horizontal"  role="form" style="padding-left:5%;border:double" method="post">
 
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label" style="font-size:20px">Class: </label>
+                    <div class="form-group" >
+                        <label class="col-lg-3 control-label" style="font-size:20px;">Class: </label>
                         <div class="col-lg-3 ">
-                            <select id="ClassSelector" name="Class">
-                                <option>--Select--</option>
-                                @foreach(var stc in clas)
+                            <select id="ClassSelector" name="Class" >
+
+                                @foreach (var stc in clas)
                                 {
-                                <option >@stc.Name</option>    
+                                    <option>@stc.Name</option>
                                 }
-                                
-                                
+
+
 
                             </select>
                         </div>
@@ -54,7 +37,7 @@
                                 $('#ClassSelector').change(function () {
                                     var Email = $('#ClassSelector').val();
 
-                                    //alert('User Name = ' + Email);
+                                    alert('User Name = ' + Email);
 
                                     $.post("/Admin/getSubjectName", { Name: Email }, function (data) {
 
@@ -68,13 +51,13 @@
 
                             });
                         </script>
-
+                    </div>
 
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label" style="font-size:20px">Subject: </label>
                             <div class="col-lg-3 " id="subjectS">
-                                <select id="SubjectSelector" name="Subject">
+                                <select id="SubjectSelector"  name="Subject">
                                     <option>--Select--</option>
                                 </select>
                             </div>
@@ -83,7 +66,7 @@
                         <script>
 
                             function ChapterSelect(id) {
-                               // alert(id);
+                               alert(id);
                                 $.post("/Admin/getChapterName", {Name:$("#ClassSelector").val(), ID: id }, function (data) {
 
                                    // alert(data.SubjectName);
@@ -91,7 +74,7 @@
                                 });
                             }
                         </script>
-                     </div><div class="form-group">
+                      <div class="form-group">
                         <label class="col-lg-3 control-label" style="font-size:20px">Chapter: </label>
                         <div class="col-lg-3 " id="chapterS">
                             <select id="ChapterSelector" name="ChapterName">
@@ -155,9 +138,4 @@
 
             </div>
 
-            <!--            <div class="col-md-3 col-sm-4">-->
-            <!--            </div> -->
-
-        </div>
-    </div>
-</div>
+            

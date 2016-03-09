@@ -10,10 +10,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="sidebar-page rmm taxlist graphite">
+                <div class="sidebar-page rmm taxlist graphite" style="border:groove">
 
                     <span class="sidebar-title" style="display: block;">Classes</span>
-                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;">
+                    <ul id="menu-formget-features" class="rmm-main-list" style="display: block;list-style:none">
                         
                         @foreach(var v in listOfClass)
                         { 
@@ -22,6 +22,7 @@
                                     @v.Name
                                     <span class="caret"></span>
                                 </a>
+                                <hr/>
                                 @foreach(var obj in v.SubjectClass.Where(x=>x.Class_Id==v.ClassId).Select(x=>x.Subject))
                                 {
                                     subClassId = new db().SubjectClass.First(x => x.Subject_Id == obj.SubjectId && x.Class_Id == v.ClassId).SubClassId;
